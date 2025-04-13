@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../models/dividend_data.dart';
 
 class DividendService {
   static const String _apiKey = 'OICQLJJPW42HGD9Y'; // Consider storing this in a secure config file
@@ -31,12 +32,10 @@ class DividendService {
 
         timeSeries.forEach((key, value) {
           final date = DateTime.parse(key);
-          final dividend = value['7. dividend amount'].toString();
-          if (dividend != '0.0000') {
-            dividendData.add({
-              'date': date,
-              'dividend': double.parse(dividend),
-            });
+          final dividend = double.tryParse(value['7. dividend amount'].toString()) ?? 0.0;
+          if (dividend > 0) {  // Only add non-zero dividends
+            final divData = DividendData(date: date, amount: dividend);
+            dividendData.add(divData.toStandardMap());
           }
         });
 
@@ -100,6 +99,11 @@ class DividendService {
   static double calculateDividendYield(double annualDividendIncome, double currentPrice) {
     if (currentPrice <= 0) return 0;
     return (annualDividendIncome / currentPrice) * 100;
+  }
+
+  static double calculateYieldOnCost(double annualDividendIncome, double purchasePrice) {
+    if (purchasePrice <= 0) return 0;
+    return (annualDividendIncome / purchasePrice) * 100;
   }
 }
 

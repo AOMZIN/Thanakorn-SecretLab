@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../models/stock_data.dart';
+import '../services/cache_service.dart'; // Changed import
 import '../services/dividend_service.dart';
 import 'stock_detail_screen.dart';
 
@@ -145,56 +145,6 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
     }
 
     return totalCurrentValue - totalInvestment;
-  }
-
-  double _calculateAnnualDividendIncome(List<Map<String, dynamic>> dividendData) {
-    double totalDividend = 0;
-    final now = DateTime.now();
-    final oneYearAgo = now.subtract(const Duration(days: 365));
-
-    for (final dividend in dividendData) {
-      final date = dividend['date'] as DateTime;
-      if (date.isAfter(oneYearAgo)) {
-        totalDividend += dividend['dividend'] as double;
-      }
-    }
-
-    return totalDividend;
-  }
-
-  double _calculateMonthlyDividendIncome(List<Map<String, dynamic>> dividendData) {
-    double totalDividend = 0;
-    final now = DateTime.now();
-    final oneMonthAgo = now.subtract(const Duration(days: 30));
-
-    for (final dividend in dividendData) {
-      final date = dividend['date'] as DateTime;
-      if (date.isAfter(oneMonthAgo)) {
-        totalDividend += dividend['dividend'] as double;
-      }
-    }
-
-    return totalDividend;
-  }
-
-  double _calculateDailyDividendIncome(List<Map<String, dynamic>> dividendData) {
-    double totalDividend = 0;
-    final now = DateTime.now();
-    final oneDayAgo = now.subtract(const Duration(days: 1));
-
-    for (final dividend in dividendData) {
-      final date = dividend['date'] as DateTime;
-      if (date.isAfter(oneDayAgo)) {
-        totalDividend += dividend['dividend'] as double;
-      }
-    }
-
-    return totalDividend;
-  }
-
-  double _calculateDividendYield(double annualDividendIncome, double currentPrice) {
-    if (currentPrice == 0) return 0;
-    return (annualDividendIncome / currentPrice) * 100;
   }
 
   @override
@@ -513,11 +463,12 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
       return const SizedBox();
     }
 
+    // Use the service methods consistently
     final annualDividendIncome = DividendService.calculateAnnualDividendIncome(dividendData);
-    final monthlyDividendIncome = _calculateMonthlyDividendIncome(dividendData);
-    final dailyDividendIncome = _calculateDailyDividendIncome(dividendData);
+    final monthlyDividendIncome = DividendService.calculateMonthlyDividendIncome(dividendData);
+    final dailyDividendIncome = DividendService.calculateDailyDividendIncome(dividendData);
     final currentPrice = _stockData[symbol]?.candlesData.last.close ?? 0.0;
-    final dividendYield = _calculateDividendYield(annualDividendIncome, currentPrice);
+    final dividendYield = DividendService.calculateDividendYield(annualDividendIncome, currentPrice);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
