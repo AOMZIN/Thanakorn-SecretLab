@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'screens/watchlist_screen.dart';
+import 'screens/search_screen.dart';
+import 'screens/portfolio_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,7 +50,8 @@ class _StockMarketAppState extends State<StockMarketApp> {
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         onPageChanged: _onItemSelected,
-        children: const [
+        children: [
+          // Remove const keyword here
           WatchlistScreen(),
           SearchScreen(),
           PortfolioScreen(),
