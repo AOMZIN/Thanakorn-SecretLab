@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'dart:math' as math;
 import '../models/stock_data.dart';
 import '../services/dividend_service.dart';
@@ -11,7 +9,7 @@ import '../services/dividend_service.dart';
 class StockDetailScreen extends StatefulWidget {
   final String symbol;
 
-  const StockDetailScreen({Key? key, required this.symbol}) : super(key: key);
+  const StockDetailScreen({super.key, required this.symbol});
 
   @override
   _StockDetailScreenState createState() => _StockDetailScreenState();
@@ -56,10 +54,8 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
         response = await yahooFinanceReader.getDailyDTOs(widget.symbol);
 
         // Cache the new data
-        if (response != null) {
-          StockDataCache.cacheData(widget.symbol, response);
-        }
-      }
+        StockDataCache.cacheData(widget.symbol, response);
+            }
 
       // Filter the response based on _timeRange
       final filteredData = response != null ?

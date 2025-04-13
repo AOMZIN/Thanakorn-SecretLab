@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import '../services/cache_service.dart'; // Changed import
 import '../services/dividend_service.dart';
 import 'stock_detail_screen.dart';
@@ -281,11 +279,11 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           showDialog(
             context: context,
             builder: (context) {
-              final TextEditingController _controller = TextEditingController();
-              final TextEditingController _sharesController = TextEditingController();
-              final TextEditingController _amountController = TextEditingController();
-              DateTime? _selectedDate;
-              bool _isSharesSelected = true;
+              final TextEditingController controller = TextEditingController();
+              final TextEditingController sharesController = TextEditingController();
+              final TextEditingController amountController = TextEditingController();
+              DateTime? selectedDate;
+              bool isSharesSelected = true;
 
               return AlertDialog(
                 title: const Text('Add Stock to Portfolio'),
@@ -295,7 +293,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextField(
-                          controller: _controller,
+                          controller: controller,
                           decoration: const InputDecoration(
                             labelText: 'Enter stock symbol',
                           ),
@@ -309,10 +307,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                               children: [
                                 Radio<bool>(
                                   value: true,
-                                  groupValue: _isSharesSelected,
+                                  groupValue: isSharesSelected,
                                   onChanged: (value) {
                                     setState(() {
-                                      _isSharesSelected = value!;
+                                      isSharesSelected = value!;
                                     });
                                   },
                                 ),
@@ -323,10 +321,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                               children: [
                                 Radio<bool>(
                                   value: false,
-                                  groupValue: _isSharesSelected,
+                                  groupValue: isSharesSelected,
                                   onChanged: (value) {
                                     setState(() {
-                                      _isSharesSelected = value!;
+                                      isSharesSelected = value!;
                                     });
                                   },
                                 ),
@@ -336,9 +334,9 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                           ],
                         ),
                         const SizedBox(height: 16),
-                        if (_isSharesSelected)
+                        if (isSharesSelected)
                           TextField(
-                            controller: _sharesController,
+                            controller: sharesController,
                             decoration: const InputDecoration(
                               labelText: 'Enter number of shares',
                             ),
@@ -346,7 +344,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                           )
                         else
                           TextField(
-                            controller: _amountController,
+                            controller: amountController,
                             decoration: const InputDecoration(
                               labelText: 'Enter amount in \$',
                             ),
@@ -363,14 +361,14 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                             );
                             if (date != null) {
                               setState(() {
-                                _selectedDate = date;
+                                selectedDate = date;
                               });
                             }
                           },
                           child: const Text('Select Date'),
                         ),
-                        if (_selectedDate != null)
-                          Text('Selected Date: ${DateFormat('MMM d, yyyy').format(_selectedDate!)}'),
+                        if (selectedDate != null)
+                          Text('Selected Date: ${DateFormat('MMM d, yyyy').format(selectedDate!)}'),
                       ],
                     );
                   },
@@ -384,12 +382,12 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      final symbol = _controller.text.trim().toUpperCase();
-                      if (symbol.isNotEmpty && _selectedDate != null) {
+                      final symbol = controller.text.trim().toUpperCase();
+                      if (symbol.isNotEmpty && selectedDate != null) {
                         final response = await const YahooFinanceDailyReader().getDailyDTOs(symbol);
-                        if (response != null && response.candlesData.isNotEmpty) {
+                        if (response.candlesData.isNotEmpty) {
                           final purchaseCandle = response.candlesData.firstWhere(
-                                (candle) => candle.date.isAfter(_selectedDate!) || candle.date.isAtSameMomentAs(_selectedDate!),
+                                (candle) => candle.date.isAfter(selectedDate!) || candle.date.isAtSameMomentAs(selectedDate!),
                             orElse: () => response.candlesData.first,
                           );
 
@@ -401,10 +399,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                           }
 
                           double shares;
-                          if (_isSharesSelected) {
-                            shares = double.tryParse(_sharesController.text.trim()) ?? 0.0;
+                          if (isSharesSelected) {
+                            shares = double.tryParse(sharesController.text.trim()) ?? 0.0;
                           } else {
-                            final amount = double.tryParse(_amountController.text.trim()) ?? 0.0;
+                            final amount = double.tryParse(amountController.text.trim()) ?? 0.0;
                             if (amount <= 0) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('Error: Amount must be greater than zero')),
@@ -416,7 +414,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                           }
 
                           if (shares > 0) {
-                            _addToPortfolio(symbol, _selectedDate!, shares);
+                            _addToPortfolio(symbol, selectedDate!, shares);
                           }
                         }
                       }

@@ -136,11 +136,11 @@ class SearchResultView extends StatelessWidget {
   final String? selectedYear;
 
   const SearchResultView({
-    Key? key,
+    super.key,
     required this.symbol,
     required this.response,
     this.selectedYear,
-  }) : super(key: key);
+  });
 
   List<YahooFinanceCandleData> _filterDataByYear(List<YahooFinanceCandleData> data) {
     if (selectedYear == null) return data;
