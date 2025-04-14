@@ -32,6 +32,40 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// Add these classes to your code
+class WatchlistScreen extends StatelessWidget {
+  const WatchlistScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('Watchlist Screen'),
+    );
+  }
+}
+
+class SearchScreen extends StatelessWidget {
+  const SearchScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('Search Screen'),
+    );
+  }
+}
+
+class PortfolioScreen extends StatelessWidget {
+  const PortfolioScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('Portfolio Screen'),
+    );
+  }
+}
+
 // Enhanced StockDataCache with improved error handling and expiration logic
 class StockDataCache {
   static final Map<String, CachedStockData> _cache = {};
@@ -123,32 +157,7 @@ class DividendService {
     }
   }
 
-  // The calculation methods can remain unchanged
-  static double calculateDividendIncome(List<Map<String, dynamic>> dividendData, int days) {
-    if (dividendData.isEmpty) return 0;
-
-    final now = DateTime.now();
-    final cutoffDate = now.subtract(Duration(days: days));
-
-    return dividendData
-        .where((dividend) => (dividend['date'] as DateTime).isAfter(cutoffDate))
-        .fold(0.0, (sum, dividend) => sum + (dividend['dividend'] as double));
-  }
-
-  static double calculateAnnualDividendIncome(List<Map<String, dynamic>> dividendData) =>
-      calculateDividendIncome(dividendData, 365);
-
-  static double calculateMonthlyDividendIncome(List<Map<String, dynamic>> dividendData) =>
-      calculateDividendIncome(dividendData, 30);
-
-  static double calculateDailyDividendIncome(List<Map<String, dynamic>> dividendData) =>
-      calculateAnnualDividendIncome(dividendData) / 365;
-
-  static double calculateDividendYield(double annualDividendIncome, double currentPrice) =>
-      currentPrice <= 0 ? 0 : (annualDividendIncome / currentPrice) * 100;
-}
-
-  // Optimized dividend income calculation methods
+  // The calculation methods remain here
   static double calculateDividendIncome(List<Map<String, dynamic>> dividendData, int days) {
     if (dividendData.isEmpty) return 0;
 
