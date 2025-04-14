@@ -307,9 +307,12 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
     } catch (e) {
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${e.toString().substring(0, math.min(e.toString().length, 100))}')),
-      );
+      // Use a safer approach that doesn't rely on context typing
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${e.toString().substring(0, math.min(e.toString().length, 100))}')),
+        );
+      });
 
       setState(() {
         _isLoading = false;
