@@ -64,9 +64,9 @@ class CachedStockData {
   const CachedStockData({required this.data, required this.timestamp});
 }
 
-// DividendService with enhanced caching and error handling
+// DividendService with polygon.io integration
 class DividendService {
-  static const String _apiKey = 'OICQLJJPW42HGD9Y';
+  static const String _apiKey = '95CNBUXiPASeEmnDHPcUH9AP21Mh_n7i'; // Replace with your polygon.io API key
   static final Map<String, CachedDividendData> _cache = {};
   static const Duration _cacheDuration = Duration(days: 1);
 
@@ -78,8 +78,9 @@ class DividendService {
     }
 
     try {
+      // Polygon.io API for dividends
       final response = await http.get(Uri.parse(
-          'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=$symbol&apikey=$_apiKey'
+          'https://api.polygon.io/v3/reference/dividends?ticker=$symbol&apiKey=$_apiKey'
       )).timeout(const Duration(seconds: 10));
 
       if (response.statusCode != 200) {
@@ -89,16 +90,17 @@ class DividendService {
       final data = json.decode(response.body);
 
       // Check for API errors
-      if (data.containsKey('Error Message') || !data.containsKey('Monthly Adjusted Time Series')) {
+      if (data['status'] != 'OK' || !data.containsKey('results')) {
         return [];
       }
 
-      final timeSeries = data['Monthly Adjusted Time Series'] as Map<String, dynamic>;
+      final results = data['results'] as List<dynamic>;
       final dividendData = <Map<String, dynamic>>[];
 
-      for (final entry in timeSeries.entries) {
-        final date = DateTime.parse(entry.key);
-        final dividend = double.tryParse(entry.value['7. dividend amount'] ?? '0.0000') ?? 0.0;
+      for (final item in results) {
+        // Parse the ex-dividend date
+        final date = DateTime.parse(item['ex_dividend_date']);
+        final dividend = item['cash_amount'] as double? ?? 0.0;
 
         if (dividend > 0.0) {
           dividendData.add({
@@ -120,6 +122,31 @@ class DividendService {
       return [];
     }
   }
+
+  // The calculation methods can remain unchanged
+  static double calculateDividendIncome(List<Map<String, dynamic>> dividendData, int days) {
+    if (dividendData.isEmpty) return 0;
+
+    final now = DateTime.now();
+    final cutoffDate = now.subtract(Duration(days: days));
+
+    return dividendData
+        .where((dividend) => (dividend['date'] as DateTime).isAfter(cutoffDate))
+        .fold(0.0, (sum, dividend) => sum + (dividend['dividend'] as double));
+  }
+
+  static double calculateAnnualDividendIncome(List<Map<String, dynamic>> dividendData) =>
+      calculateDividendIncome(dividendData, 365);
+
+  static double calculateMonthlyDividendIncome(List<Map<String, dynamic>> dividendData) =>
+      calculateDividendIncome(dividendData, 30);
+
+  static double calculateDailyDividendIncome(List<Map<String, dynamic>> dividendData) =>
+      calculateAnnualDividendIncome(dividendData) / 365;
+
+  static double calculateDividendYield(double annualDividendIncome, double currentPrice) =>
+      currentPrice <= 0 ? 0 : (annualDividendIncome / currentPrice) * 100;
+}
 
   // Optimized dividend income calculation methods
   static double calculateDividendIncome(List<Map<String, dynamic>> dividendData, int days) {
