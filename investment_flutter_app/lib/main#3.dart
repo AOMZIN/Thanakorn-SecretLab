@@ -1347,13 +1347,6 @@ class CachedDividendData {
   });
 }
 
-class CachedDividendData {
-  final List<Map<String, dynamic>> data;
-  final DateTime timestamp;
-
-  CachedDividendData({required this.data, required this.timestamp});
-}
-
 class _StockDetailScreenState extends State<StockDetailScreen> {
   YahooFinanceResponse? _stockData;
   List<Map<String, dynamic>>? _dividendData;
