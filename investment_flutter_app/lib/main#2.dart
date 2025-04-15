@@ -1012,18 +1012,17 @@ class StockDetailScreen extends StatefulWidget {
 }
 
 class DividendService {
-  static const String _apiKey = '95CNBUXiPASeEmnDHPcUH9AP21Mh_n7i'; // Replace with your Polygon.io API key
+  static const String _apiKey = 'OICQLJJPW42HGD9Y';
   static final Map<String, CachedDividendData> _cache = {};
   static const Duration _cacheDuration = Duration(days: 1);
 
-  // Fetch dividend data from the API
   static Future<List<Map<String, dynamic>>> fetchDividendData(String symbol) async {
     if (_cache.containsKey(symbol) &&
         DateTime.now().difference(_cache[symbol]!.timestamp) < _cacheDuration) {
       return _cache[symbol]!.data;
     }
 
-    final url = 'https://api.polygon.io/v3/reference/dividends?ticker=$symbol&limit=100&sort=ex_dividend_date&order=desc&apiKey=$_apiKey';
+    final url = 'https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=$symbol&apikey=$_apiKey';
 
     try {
       final response = await http.get(Uri.parse(url));
@@ -1031,39 +1030,27 @@ class DividendService {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
 
-        if (data['results'] == null) {
+        if (data.containsKey('Error Message') || !data.containsKey('Monthly Adjusted Time Series')) {
           return [];
         }
 
+        final timeSeries = data['Monthly Adjusted Time Series'];
         final dividendData = <Map<String, dynamic>>[];
-        String? nextUrl = data['next_url'];
 
-        for (final item in data['results']) {
-          final exDate = item['ex_dividend_date'];
-          final cashAmount = item['cash_amount'];
-          final frequency = item['frequency'];
-          final dividendType = item['dividend_type'];
-          final payDate = item['pay_date'];
-          final recordDate = item['record_date'];
-          final declarationDate = item['declaration_date'];
-
-          if (exDate != null && cashAmount != null) {
+        timeSeries.forEach((key, value) {
+          final date = DateTime.parse(key);
+          final dividend = value['7. dividend amount'].toString();
+          if (dividend != '0.0000') {
             dividendData.add({
-              'date': DateTime.parse(exDate),
-              'dividend': double.parse(cashAmount.toString()),
-              'frequency': frequency,
-              'type': dividendType,
-              'pay_date': payDate != null ? DateTime.parse(payDate) : null,
-              'record_date': recordDate != null ? DateTime.parse(recordDate) : null,
-              'declaration_date': declarationDate != null ? DateTime.parse(declarationDate) : null,
+              'date': date,
+              'dividend': double.parse(dividend),
             });
           }
-        }
+        });
 
         _cache[symbol] = CachedDividendData(
           data: dividendData,
           timestamp: DateTime.now(),
-          nextUrl: nextUrl,
         );
 
         return dividendData;
@@ -1076,275 +1063,50 @@ class DividendService {
     }
   }
 
-  // Load more dividend data using pagination
-  static Future<List<Map<String, dynamic>>> fetchMoreDividendData(String symbol) async {
-    if (!_cache.containsKey(symbol) || _cache[symbol]!.nextUrl == null) {
-      return [];
-    }
-
-    final nextUrl = _cache[symbol]!.nextUrl!;
-
-    try {
-      final response = await http.get(Uri.parse(nextUrl));
-
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-
-        if (data['results'] == null) {
-          return [];
-        }
-
-        final dividendData = <Map<String, dynamic>>[];
-        String? newNextUrl = data['next_url'];
-
-        for (final item in data['results']) {
-          final exDate = item['ex_dividend_date'];
-          final cashAmount = item['cash_amount'];
-          final frequency = item['frequency'];
-          final dividendType = item['dividend_type'];
-          final payDate = item['pay_date'];
-          final recordDate = item['record_date'];
-          final declarationDate = item['declaration_date'];
-
-          if (exDate != null && cashAmount != null) {
-            dividendData.add({
-              'date': DateTime.parse(exDate),
-              'dividend': double.parse(cashAmount.toString()),
-              'frequency': frequency,
-              'type': dividendType,
-              'pay_date': payDate != null ? DateTime.parse(payDate) : null,
-              'record_date': recordDate != null ? DateTime.parse(recordDate) : null,
-              'declaration_date': declarationDate != null ? DateTime.parse(declarationDate) : null,
-            });
-          }
-        }
-
-        // Update the cache with new data and next URL
-        final currentData = List<Map<String, dynamic>>.from(_cache[symbol]!.data);
-        currentData.addAll(dividendData);
-
-        _cache[symbol] = CachedDividendData(
-          data: currentData,
-          timestamp: DateTime.now(),
-          nextUrl: newNextUrl,
-        );
-
-        return dividendData;
-      } else {
-        throw Exception('Failed to load more dividend data: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error fetching more dividend data for $symbol: $e');
-      return [];
-    }
-  }
-
-  // Calculate annual dividend income using frequency data
   static double calculateAnnualDividendIncome(List<Map<String, dynamic>> dividendData) {
     if (dividendData.isEmpty) return 0;
 
-    // Group by frequency
-    Map<int, List<Map<String, dynamic>>> dividendsByFrequency = {};
+    double totalDividend = 0;
+    final now = DateTime.now();
+    final oneYearAgo = now.subtract(const Duration(days: 365));
 
-    for (final div in dividendData) {
-      final frequency = div.containsKey('frequency') ? div['frequency'] : 0;
-      if (!dividendsByFrequency.containsKey(frequency)) {
-        dividendsByFrequency[frequency] = [];
+    for (final dividend in dividendData) {
+      final date = dividend['date'] as DateTime;
+      if (date.isAfter(oneYearAgo)) {
+        totalDividend += dividend['dividend'] as double;
       }
-      dividendsByFrequency[frequency]!.add(div);
     }
 
-    double annualIncome = 0;
-
-    // Calculate based on frequency
-    dividendsByFrequency.forEach((frequency, divs) {
-      if (divs.isEmpty) return;
-
-      // Sort by date, get most recent
-      divs.sort((a, b) => (b['date'] as DateTime).compareTo(a['date'] as DateTime));
-      final latestDiv = divs.first;
-      final amount = latestDiv['dividend'] as double;
-
-      switch (frequency) {
-        case 0: // One-time, don't include in calculation
-          break;
-        case 1: // Annual
-          annualIncome += amount;
-          break;
-        case 2: // Bi-annual
-          annualIncome += amount * 2;
-          break;
-        case 4: // Quarterly
-          annualIncome += amount * 4;
-          break;
-        case 12: // Monthly
-          annualIncome += amount * 12;
-          break;
-        case 24: // Bi-monthly
-          annualIncome += amount * 24;
-          break;
-        case 52: // Weekly
-          annualIncome += amount * 52;
-          break;
-        default:
-        // If frequency unknown, use historical approach
-          final now = DateTime.now();
-          final oneYearAgo = now.subtract(const Duration(days: 365));
-          double total = 0;
-          for (final d in divs) {
-            if ((d['date'] as DateTime).isAfter(oneYearAgo)) {
-              total += d['dividend'] as double;
-            }
-          }
-          annualIncome += total;
-      }
-    });
-
-    return annualIncome;
+    return totalDividend;
   }
 
-  // Calculate monthly dividend income based on the more accurate frequency data
   static double calculateMonthlyDividendIncome(List<Map<String, dynamic>> dividendData) {
-    return calculateAnnualDividendIncome(dividendData) / 12;
+    if (dividendData.isEmpty) return 0;
+
+    double totalDividend = 0;
+    final now = DateTime.now();
+    final oneMonthAgo = now.subtract(const Duration(days: 30));
+
+    for (final dividend in dividendData) {
+      final date = dividend['date'] as DateTime;
+      if (date.isAfter(oneMonthAgo)) {
+        totalDividend += dividend['dividend'] as double;
+      }
+    }
+
+    return totalDividend;
   }
 
-  // Calculate daily dividend income
   static double calculateDailyDividendIncome(List<Map<String, dynamic>> dividendData) {
+    if (dividendData.isEmpty) return 0;
+
     return calculateAnnualDividendIncome(dividendData) / 365;
   }
 
-  // Calculate dividend yield
   static double calculateDividendYield(double annualDividendIncome, double currentPrice) {
     if (currentPrice <= 0) return 0;
     return (annualDividendIncome / currentPrice) * 100;
   }
-
-  // Get frequency description
-  static String getFrequencyDescription(int frequency) {
-    switch (frequency) {
-      case 0: return 'One-time';
-      case 1: return 'Annual';
-      case 2: return 'Bi-annual';
-      case 4: return 'Quarterly';
-      case 12: return 'Monthly';
-      case 24: return 'Bi-monthly';
-      case 52: return 'Weekly';
-      default: return 'Unknown';
-    }
-  }
-
-  // Get dividend type description
-  static String getDividendTypeDescription(String type) {
-    switch (type) {
-      case 'CD': return 'Regular Cash Dividend';
-      case 'SC': return 'Special Cash Dividend';
-      case 'LT': return 'Long-Term Capital Gain';
-      case 'ST': return 'Short-Term Capital Gain';
-      default: return type;
-    }
-  }
-
-  // Check if a stock has dividend payments
-  static bool hasDividendPayments(List<Map<String, dynamic>> dividendData) {
-    return dividendData.isNotEmpty;
-  }
-
-  // Get the next expected dividend date (estimate based on frequency)
-  static DateTime? getNextExpectedDividendDate(List<Map<String, dynamic>> dividendData) {
-    if (dividendData.isEmpty) return null;
-
-    // Sort by date descending to get most recent
-    final sortedData = List<Map<String, dynamic>>.from(dividendData)
-      ..sort((a, b) => (b['date'] as DateTime).compareTo(a['date'] as DateTime));
-
-    final lastDividend = sortedData.first;
-    final lastDate = lastDividend['date'] as DateTime;
-    final frequency = lastDividend['frequency'] as int? ?? 0;
-
-    // If it's a one-time dividend or no frequency info, we can't predict next date
-    if (frequency == 0) return null;
-
-    // Calculate days between payments based on frequency
-    int daysToAdd;
-    switch (frequency) {
-      case 1: // Annual
-        daysToAdd = 365;
-        break;
-      case 2: // Bi-annual
-        daysToAdd = 182;
-        break;
-      case 4: // Quarterly
-        daysToAdd = 91;
-        break;
-      case 12: // Monthly
-        daysToAdd = 30;
-        break;
-      case 24: // Bi-monthly
-        daysToAdd = 15;
-        break;
-      case 52: // Weekly
-        daysToAdd = 7;
-        break;
-      default:
-        return null;
-    }
-
-    return lastDate.add(Duration(days: daysToAdd));
-  }
-
-  // Check if a stock is eligible for dividend capture strategy
-  // (meaning a dividend ex-date is coming soon)
-  static bool isEligibleForDividendCapture(List<Map<String, dynamic>> dividendData) {
-    final nextDate = getNextExpectedDividendDate(dividendData);
-    if (nextDate == null) return false;
-
-    // If next dividend is expected within 30 days, it might be eligible
-    final now = DateTime.now();
-    final difference = nextDate.difference(now).inDays;
-
-    return difference >= 0 && difference <= 30;
-  }
-
-  // Calculate total dividend income for a period
-  static double calculateTotalDividendIncome(
-      List<Map<String, dynamic>> dividendData,
-      DateTime startDate,
-      DateTime endDate
-      ) {
-    double total = 0;
-
-    for (final div in dividendData) {
-      final date = div['date'] as DateTime;
-      if (date.isAfter(startDate) && date.isBefore(endDate)) {
-        total += div['dividend'] as double;
-      }
-    }
-
-    return total;
-  }
-
-  // Clear cache for a specific symbol
-  static void clearCache(String symbol) {
-    _cache.remove(symbol);
-  }
-
-  // Clear all cache
-  static void clearAllCache() {
-    _cache.clear();
-  }
-}
-
-// Updated CachedDividendData to include nextUrl for pagination
-class CachedDividendData {
-  final List<Map<String, dynamic>> data;
-  final DateTime timestamp;
-  final String? nextUrl;
-
-  CachedDividendData({
-    required this.data,
-    required this.timestamp,
-    this.nextUrl,
-  });
 }
 
 class CachedDividendData {
@@ -1557,7 +1319,6 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
             _buildSyncfusionChart(),
             _buildTimeRangeSelector(),
             _buildStockInfo(),
-            _buildDividendChart(),
             _buildDividendInfo(),
             _buildDividendCalculations(),
           ],
@@ -1766,91 +1527,31 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
       );
     }
 
-    // Group dividends by frequency
-    final Map<int, String> frequencyLabels = {
-      0: 'One-time',
-      1: 'Annual',
-      2: 'Bi-annual',
-      4: 'Quarterly',
-      12: 'Monthly',
-      24: 'Bi-monthly',
-      52: 'Weekly',
-    };
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Dividend History',
+            'Dividend Information',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          // Show dividend frequency if available in most recent dividend
-          if (_dividendData!.isNotEmpty && _dividendData!.first.containsKey('frequency'))
-            _buildInfoRow(
-                'Payment Frequency',
-                frequencyLabels[_dividendData!.first['frequency']] ?? 'Unknown'
-            ),
-          const SizedBox(height: 8),
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: math.min(10, _dividendData!.length), // Show max 10 recent dividends
+            itemCount: _dividendData!.length,
             itemBuilder: (context, index) {
               final dividend = _dividendData![index];
-              final dividendType = dividend.containsKey('type')
-                  ? _getDividendTypeLabel(dividend['type'])
-                  : '';
-
-              return Card(
-                margin: const EdgeInsets.only(bottom: 8.0),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            DateFormat('MMM d, yyyy').format(dividend['date']),
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            '\$${dividend['dividend'].toStringAsFixed(4)}',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      if (dividendType.isNotEmpty)
-                        Text('Type: $dividendType',
-                            style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                    ],
-                  ),
-                ),
+              return _buildInfoRow(
+                'Date: ${DateFormat('yyyy-MM-dd').format(dividend['date'])}',
+                '\$${dividend['dividend'].toStringAsFixed(2)}',
               );
             },
           ),
         ],
       ),
     );
-  }
-
-  String _getDividendTypeLabel(String type) {
-    switch (type) {
-      case 'CD':
-        return 'Regular Cash';
-      case 'SC':
-        return 'Special Cash';
-      case 'LT':
-        return 'Long-Term Capital Gain';
-      case 'ST':
-        return 'Short-Term Capital Gain';
-      default:
-        return type;
-    }
   }
 
   Widget _buildDividendCalculations() {
@@ -1879,40 +1580,6 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
           _buildInfoRow('Daily Dividend Income', '\$${dailyDividendIncome.toStringAsFixed(2)}'),
           _buildInfoRow('Dividend Yield', '${dividendYield.toStringAsFixed(2)}%'),
         ],
-      ),
-    );
-  }
-
-  Widget _buildDividendChart() {
-    if (_dividendData == null || _dividendData!.isEmpty) {
-      return const SizedBox();
-    }
-
-    // Sort by date
-    final sortedData = List<Map<String, dynamic>>.from(_dividendData!)
-      ..sort((a, b) => (a['date'] as DateTime).compareTo(b['date'] as DateTime));
-
-    return Container(
-      height: 200,
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: SfCartesianChart(
-        primaryXAxis: DateTimeAxis(
-          dateFormat: DateFormat.yMMMd(),
-          intervalType: DateTimeIntervalType.auto,
-        ),
-        primaryYAxis: NumericAxis(
-          numberFormat: NumberFormat.currency(symbol: '\$'),
-        ),
-        series: <CartesianSeries>[
-          ColumnSeries<Map<String, dynamic>, DateTime>(
-            dataSource: sortedData,
-            xValueMapper: (Map<String, dynamic> data, _) => data['date'] as DateTime,
-            yValueMapper: (Map<String, dynamic> data, _) => data['dividend'] as double,
-            name: 'Dividend Amount',
-            color: Colors.green.shade700,
-          )
-        ],
-        tooltipBehavior: TooltipBehavior(enable: true),
       ),
     );
   }

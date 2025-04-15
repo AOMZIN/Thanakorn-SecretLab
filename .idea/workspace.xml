@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee746f4c-4e08-43b7-a3e5-24a1f3ad02d2" name="Changes" comment="" />
+    <list default="true" id="ee746f4c-4e08-43b7-a3e5-24a1f3ad02d2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/investment_flutter_app/lib/main#3.dart" beforeDir="false" afterPath="$PROJECT_DIR$/investment_flutter_app/lib/main#3.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,9 +25,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2vfXR6S925hy4aHcWwNHhB8fnyq" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -34,6 +36,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Flutter.main#1.dart.executor": "Run",
+    "Flutter.main#3.dart.executor": "Run",
     "Flutter.main.dart.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -50,9 +53,13 @@
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
-  <component name="RunManager" selected="Flutter.main.dart">
+  <component name="RunManager" selected="Flutter.main#3.dart">
     <configuration name="main#1.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/investment_flutter_app/lib/main#1.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main#3.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/investment_flutter_app/lib/main#3.dart" />
       <method v="2" />
     </configuration>
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
@@ -61,6 +68,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter.main#3.dart" />
         <item itemvalue="Flutter.main.dart" />
         <item itemvalue="Flutter.main#1.dart" />
       </list>
