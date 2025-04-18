@@ -2,48 +2,102 @@ from flask import Flask, render_template, request, jsonify
 import pandas as pd
 import numpy as np
 import os
-from werkzeug.utils import secure_filename
+import yfinance as yf
+from datetime import datetime
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['ALLOWED_EXTENSIONS'] = {'csv'}
+app.config['DATA_FOLDER'] = 'data'
 
-# Create uploads folder if it doesn't exist
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+# Create data folder if it doesn't exist
+os.makedirs(app.config['DATA_FOLDER'], exist_ok=True)
 
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+def get_historical_data(ticker, start_date, end_date):
+    """Download historical data for ticker using yfinance"""
+    try:
+        # Try to download from Yahoo Finance
+        data = yf.download(ticker, start=start_date, end=end_date)
+        if len(data) > 0:
+            # Save to CSV for caching
+            filename = f"{app.config['DATA_FOLDER']}/{ticker}_historical.csv"
+            data.to_csv(filename)
+            return data
+        
+        # If download failed, try to use cached data if available
+        filename = f"{app.config['DATA_FOLDER']}/{ticker}_historical.csv"
+        if os.path.exists(filename):
+            return pd.read_csv(filename, index_col=0, parse_dates=True)
+        
+        return None
+    except Exception as e:
+        print(f"Error downloading {ticker}: {str(e)}")
+        return None
 
-def calculate_metrics(df):
-    """Calculate portfolio metrics from CSV data"""
-    # This is where you'll implement the calculations for all your metrics
-    # For this example, I'll implement a few basic ones
+def calculate_returns(df):
+    """Calculate monthly returns from price data"""
+    # Convert index to datetime if it's not already
+    if not isinstance(df.index, pd.DatetimeIndex):
+        df.index = pd.to_datetime(df.index)
     
+    # Calculate monthly returns
+    monthly_returns = df['Close'].resample('M').last().pct_change().dropna()
+    return monthly_returns
+
+def calculate_portfolio_metrics(tickers, allocations, start_date, end_date):
+    """Calculate portfolio metrics from historical data"""
+    # Validate inputs
+    if len(tickers) != len(allocations) or sum(allocations) != 100:
+        return {"error": "Invalid allocations. Must sum to 100%"}
+    
+    # Convert allocations to decimal
+    weights = [a/100 for a in allocations]
+    
+    # Get historical data for each ticker
+    all_returns = {}
+    for ticker in tickers:
+        data = get_historical_data(ticker, start_date, end_date)
+        if data is None:
+            return {"error": f"Could not get data for {ticker}"}
+        
+        monthly_returns = calculate_returns(data)
+        all_returns[ticker] = monthly_returns
+    
+    # Create a dataframe with all returns
+    returns_df = pd.DataFrame(all_returns)
+    
+    # Handle different date ranges by taking the intersection
+    if returns_df.isna().any().any():
+        returns_df = returns_df.dropna()
+    
+    if len(returns_df) == 0:
+        return {"error": "No overlapping data periods found"}
+    
+    # Calculate portfolio returns
+    portfolio_returns = returns_df.dot(weights)
+    
+    # Calculate metrics
     metrics = {}
     
-    # Example calculations (you'll need to adjust these based on your actual CSV structure)
-    # Assuming monthly returns are in a column called 'Returns'
-    if 'Returns' in df.columns:
-        returns = df['Returns'].dropna()
-        
-        # Calculate basic metrics
-        metrics['Arithmetic Mean (monthly)'] = returns.mean()
-        metrics['Arithmetic Mean (annualized)'] = (1 + returns.mean())**12 - 1
-        metrics['Geometric Mean (monthly)'] = (1 + returns).prod()**(1/len(returns)) - 1
-        metrics['Geometric Mean (annualized)'] = (1 + metrics['Geometric Mean (monthly)'])**12 - 1
-        metrics['Standard Deviation (monthly)'] = returns.std()
-        metrics['Standard Deviation (annualized)'] = returns.std() * np.sqrt(12)
-        
-        # Calculate drawdowns
-        cumulative_returns = (1 + returns).cumprod()
-        running_max = cumulative_returns.cummax()
-        drawdowns = (cumulative_returns / running_max) - 1
-        metrics['Maximum Drawdown'] = drawdowns.min()
-        
-        # Calculate Sharpe ratio (assuming risk-free rate = 0 for simplicity)
-        metrics['Sharpe Ratio'] = metrics['Arithmetic Mean (annualized)'] / metrics['Standard Deviation (annualized)']
-        
-        # Many more metrics would be calculated here...
+    # Basic return metrics
+    metrics['Arithmetic Mean (monthly)'] = portfolio_returns.mean()
+    metrics['Arithmetic Mean (annual)'] = (1 + metrics['Arithmetic Mean (monthly)'])**12 - 1
+    metrics['Geometric Mean (monthly)'] = (1 + portfolio_returns).prod()**(1/len(portfolio_returns)) - 1
+    metrics['Geometric Mean (annual)'] = (1 + metrics['Geometric Mean (monthly)'])**12 - 1
+    
+    # Risk metrics
+    metrics['Standard Deviation (monthly)'] = portfolio_returns.std()
+    metrics['Standard Deviation (annual)'] = metrics['Standard Deviation (monthly)'] * np.sqrt(12)
+    
+    # Drawdown analysis
+    cumulative_returns = (1 + portfolio_returns).cumprod()
+    running_max = cumulative_returns.cummax()
+    drawdowns = (cumulative_returns / running_max) - 1
+    metrics['Maximum Drawdown'] = drawdowns.min()
+    
+    # Performance ratios
+    metrics['Sharpe Ratio'] = metrics['Arithmetic Mean (annual)'] / metrics['Standard Deviation (annual)']
+    
+    # Correlation matrix
+    metrics['Correlation Matrix'] = returns_df.corr().to_dict()
     
     return metrics
 
@@ -51,30 +105,28 @@ def calculate_metrics(df):
 def index():
     return render_template('index.html')
 
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file part'}), 400
-    
-    file = request.files['file']
-    
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
-    
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
+@app.route('/api/analyze', methods=['POST'])
+def analyze_portfolio():
+    try:
+        data = request.json
+        tickers = data.get('tickers', [])
+        allocations = data.get('allocations', [])
+        start_year = data.get('startYear', '2006')
+        start_month = data.get('startMonth', 'Jan')
+        end_year = data.get('endYear', '2025')
+        end_month = data.get('endMonth', 'Dec')
         
-        # Process the CSV file
-        try:
-            df = pd.read_csv(filepath)
-            metrics = calculate_metrics(df)
-            return jsonify({'metrics': metrics}), 200
-        except Exception as e:
-            return jsonify({'error': str(e)}), 500
-    
-    return jsonify({'error': 'File type not allowed'}), 400
+        # Convert month names to numbers
+        month_map = {'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04', 'May': '05', 'Jun': '06',
+                     'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'}
+        
+        start_date = f"{start_year}-{month_map[start_month]}-01"
+        end_date = f"{end_year}-{month_map[end_month]}-28"
+        
+        metrics = calculate_portfolio_metrics(tickers, allocations, start_date, end_date)
+        return jsonify(metrics)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

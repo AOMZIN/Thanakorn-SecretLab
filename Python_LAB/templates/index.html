@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Analyzer</title>
+    <title>Portfolio Optimizer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,12 +12,11 @@
             line-height: 1.6;
         }
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
         }
-        h1 {
+        h1, h2 {
             color: #333;
-            text-align: center;
         }
         .card {
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -25,26 +24,29 @@
             padding: 20px;
             margin-bottom: 20px;
         }
-        .metrics-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 15px;
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
         }
-        .metric-card {
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .metric-name {
-            font-weight: bold;
-            color: #555;
-        }
-        .metric-value {
-            font-size: 1.2em;
-            color: #333;
+        .column {
+            flex: 1;
+            min-width: 300px;
         }
         .form-group {
             margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
         button {
             background-color: #4CAF50;
@@ -57,121 +59,483 @@
         button:hover {
             background-color: #45a049;
         }
-        .asset-form {
-            margin-top: 20px;
-            display: none;
+        .asset-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .asset-num {
+            width: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .asset-ticker {
+            flex: 3;
+        }
+        .asset-allocation {
+            flex: 2;
+        }
+        .search-icon {
+            flex: 1;
+            text-align: center;
+        }
+        .metrics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .metric-card {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .metric-name {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        .metric-value {
+            font-size: 1.2em;
+            color: #333;
         }
         .loading {
             text-align: center;
             display: none;
         }
+        .correlation-matrix {
+            overflow-x: auto;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .allocation-total-container {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .allocation-message {
+            font-size: 0.9em;
+            color: #666;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Portfolio Analyzer</h1>
+        <h1>Portfolio Optimizer</h1>
         
-        <div class="card">
-            <h2>Upload Historical Data</h2>
-            <form id="upload-form" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="file">Select CSV file with historical data:</label>
-                    <input type="file" id="file" name="file" accept=".csv" required>
+        <div class="flex-container">
+            <div class="column">
+                <div class="card">
+                    <h2>Portfolio Assets</h2>
+                    <div id="assets-container">
+                        <!-- Asset rows will be added dynamically -->
+                        <div class="asset-row">
+                            <div class="asset-num">1</div>
+                            <div class="asset-ticker">
+                                <input type="text" placeholder="Ticker symbol" class="ticker-input">
+                            </div>
+                            <div class="search-icon">🔍</div>
+                            <div class="asset-allocation">
+                                <input type="number" placeholder="%" class="allocation-input" min="0" max="100">
+                            </div>
+                            <div>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="allocation-total-container">
+                        <strong>Total Allocation: <span id="allocation-total">0.00</span>%</strong>
+                        <div class="allocation-message">(Must equal 100%)</div>
+                    </div>
+                    
+                    <button id="add-asset-btn">Add Asset</button>
                 </div>
-                <button type="submit">Calculate Metrics</button>
-            </form>
-            <div class="loading" id="loading">
-                <p>Calculating metrics...</p>
+
+                <div class="card">
+                    <h2>Configuration</h2>
+                    <div class="form-group">
+                        <label for="portfolio-type">Portfolio Type</label>
+                        <select id="portfolio-type">
+                            <option value="tickers">Tickers</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="time-period">Time Period</label>
+                        <select id="time-period">
+                            <option value="month">Month-to-Month</option>
+                            <option value="year">Year-to-Year</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-year">Start Year</label>
+                        <select id="start-year">
+                            <!-- Years will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-month">First Month</label>
+                        <select id="start-month">
+                            <option value="Jan">Jan</option>
+                            <option value="Feb">Feb</option>
+                            <option value="Mar">Mar</option>
+                            <option value="Apr">Apr</option>
+                            <option value="May">May</option>
+                            <option value="Jun">Jun</option>
+                            <option value="Jul">Jul</option>
+                            <option value="Aug">Aug</option>
+                            <option value="Sep">Sep</option>
+                            <option value="Oct">Oct</option>
+                            <option value="Nov">Nov</option>
+                            <option value="Dec">Dec</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="end-year">End Year</label>
+                        <select id="end-year">
+                            <!-- Years will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="end-month">Last Month</label>
+                        <select id="end-month">
+                            <option value="Jan">Jan</option>
+                            <option value="Feb">Feb</option>
+                            <option value="Mar">Mar</option>
+                            <option value="Apr">Apr</option>
+                            <option value="May">May</option>
+                            <option value="Jun">Jun</option>
+                            <option value="Jul">Jul</option>
+                            <option value="Aug">Aug</option>
+                            <option value="Sep">Sep</option>
+                            <option value="Oct">Oct</option>
+                            <option value="Nov">Nov</option>
+                            <option value="Dec">Dec</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="optimization-goal">Optimization Goal</label>
+                        <select id="optimization-goal">
+                            <option value="sharpe">Mean Variance - Maximize Sharpe Ratio</option>
+                            <option value="return">Maximize Return</option>
+                            <option value="risk">Minimize Risk</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="robust-optimization">Robust Optimization</label>
+                        <select id="robust-optimization">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="historical-returns">Use Historical Returns</label>
+                        <select id="historical-returns">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <button id="analyze-btn">Analyze Portfolio</button>
+                    <div class="loading" id="loading">
+                        <p>Analyzing portfolio...</p>
+                    </div>
+                </div>
             </div>
-        </div>
-        
-        <div class="card" id="metrics-card" style="display:none;">
-            <h2>Portfolio Metrics</h2>
-            <div class="metrics-container" id="metrics-container"></div>
-        </div>
-        
-        <div class="card asset-form" id="asset-form">
-            <h2>Add Asset to Portfolio</h2>
-            <form id="add-asset-form">
-                <div class="form-group">
-                    <label for="asset-name">Asset Name:</label>
-                    <input type="text" id="asset-name" name="asset-name" required>
+
+            <div class="column">
+                <div class="card" id="metrics-card" style="display:none;">
+                    <h2>Portfolio Metrics</h2>
+                    <div class="metrics-container" id="metrics-container"></div>
                 </div>
-                <div class="form-group">
-                    <label for="asset-allocation">Allocation (%):</label>
-                    <input type="number" id="asset-allocation" name="asset-allocation" min="0" max="100" required>
+                
+                <div class="card" id="correlation-card" style="display:none;">
+                    <h2>Correlation Matrix</h2>
+                    <div class="correlation-matrix" id="correlation-matrix"></div>
                 </div>
-                <button type="submit">Add Asset</button>
-            </form>
+            </div>
         </div>
     </div>
 
     <script>
-        document.getElementById('upload-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.addEventListener('DOMContentLoaded', function() {
+            // Populate year dropdowns
+            const currentYear = new Date().getFullYear();
+            const startYearSelect = document.getElementById('start-year');
+            const endYearSelect = document.getElementById('end-year');
             
-            const formData = new FormData(this);
-            const loading = document.getElementById('loading');
-            const metricsCard = document.getElementById('metrics-card');
-            const assetForm = document.getElementById('asset-form');
-            
-            loading.style.display = 'block';
-            metricsCard.style.display = 'none';
-            
-            fetch('/upload', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                loading.style.display = 'none';
+            for (let year = 2000; year <= currentYear; year++) {
+                const startOption = document.createElement('option');
+                startOption.value = year;
+                startOption.textContent = year;
+                startYearSelect.appendChild(startOption);
                 
-                if (data.error) {
-                    alert('Error: ' + data.error);
+                const endOption = document.createElement('option');
+                endOption.value = year;
+                endOption.textContent = year;
+                endYearSelect.appendChild(endOption);
+            }
+            
+            // Set default values
+            startYearSelect.value = "2006";
+            endYearSelect.value = currentYear.toString();
+            document.getElementById('end-month').value = "Dec";
+            
+            // Add asset button functionality
+            document.getElementById('add-asset-btn').addEventListener('click', function() {
+                const assetsContainer = document.getElementById('assets-container');
+                const assetCount = assetsContainer.children.length + 1;
+                
+                const assetRow = document.createElement('div');
+                assetRow.className = 'asset-row';
+                assetRow.innerHTML = `
+                    <div class="asset-num">${assetCount}</div>
+                    <div class="asset-ticker">
+                        <input type="text" placeholder="Ticker symbol" class="ticker-input">
+                    </div>
+                    <div class="search-icon">🔍</div>
+                    <div class="asset-allocation">
+                        <input type="number" placeholder="%" class="allocation-input" min="0" max="100">
+                    </div>
+                    <div>%</div>
+                `;
+                
+                assetsContainer.appendChild(assetRow);
+                
+                // Update allocation total after adding new asset row
+                updateAllocationTotal();
+            });
+            
+            // Real-time allocation total calculation
+            document.addEventListener('input', function(e) {
+                if (e.target.classList.contains('allocation-input')) {
+                    updateAllocationTotal();
+                }
+            });
+            
+            function updateAllocationTotal() {
+                const allocationInputs = document.querySelectorAll('.allocation-input');
+                let total = 0;
+                
+                allocationInputs.forEach(input => {
+                    total += parseFloat(input.value) || 0;
+                });
+                
+                const totalDisplay = document.getElementById('allocation-total');
+                totalDisplay.textContent = total.toFixed(2);
+                
+                // Change color based on whether total equals 100%
+                if (Math.abs(total - 100) < 0.01) {
+                    totalDisplay.style.color = 'green';
+                } else {
+                    totalDisplay.style.color = 'red';
+                }
+            }
+            
+            // Analyze button functionality
+            document.getElementById('analyze-btn').addEventListener('click', function() {
+                // Collect ticker and allocation data
+                const tickerInputs = document.querySelectorAll('.ticker-input');
+                const allocationInputs = document.querySelectorAll('.allocation-input');
+                
+                const tickers = [];
+                const allocations = [];
+                
+                let totalAllocation = 0;
+                let hasEmptyFields = false;
+                
+                for (let i = 0; i < tickerInputs.length; i++) {
+                    const ticker = tickerInputs[i].value.trim();
+                    const allocation = parseFloat(allocationInputs[i].value) || 0;
+                    
+                    if (ticker && allocation > 0) {
+                        tickers.push(ticker);
+                        allocations.push(allocation);
+                        totalAllocation += allocation;
+                    } else if (ticker || allocation > 0) {
+                        // If one field is filled but not both
+                        hasEmptyFields = true;
+                    }
+                }
+                
+                if (tickers.length < 1) {
+                    alert('Please add at least one asset to your portfolio');
                     return;
                 }
                 
-                displayMetrics(data.metrics);
-                metricsCard.style.display = 'block';
-                assetForm.style.display = 'block';
-            })
-            .catch(error => {
-                loading.style.display = 'none';
-                alert('Error: ' + error);
+                if (hasEmptyFields) {
+                    alert('Some assets are missing ticker symbols or allocations');
+                    return;
+                }
+                
+                // Check if total allocation is exactly 100%
+                if (Math.abs(totalAllocation - 100) > 0.01) {
+                    alert('Total allocation must be exactly 100%. Current total: ' + totalAllocation.toFixed(2) + '%');
+                    return;
+                }
+                
+                // Get configuration
+                const startYear = document.getElementById('start-year').value;
+                const startMonth = document.getElementById('start-month').value;
+                const endYear = document.getElementById('end-year').value;
+                const endMonth = document.getElementById('end-month').value;
+                
+                // Show loading indicator
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('metrics-card').style.display = 'none';
+                document.getElementById('correlation-card').style.display = 'none';
+                
+                // Send API request
+                fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        tickers: tickers,
+                        allocations: allocations,
+                        startYear: startYear,
+                        startMonth: startMonth,
+                        endYear: endYear,
+                        endMonth: endMonth
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('loading').style.display = 'none';
+                    
+                    if (data.error) {
+                        alert('Error: ' + data.error);
+                        return;
+                    }
+                    
+                    // Display metrics
+                    displayMetrics(data);
+                    
+                    // Display correlation matrix if available
+                    if (data['Correlation Matrix']) {
+                        displayCorrelationMatrix(data['Correlation Matrix'], tickers);
+                    }
+                    
+                    document.getElementById('metrics-card').style.display = 'block';
+                    document.getElementById('correlation-card').style.display = 
+                        data['Correlation Matrix'] ? 'block' : 'none';
+                })
+                .catch(error => {
+                    document.getElementById('loading').style.display = 'none';
+                    alert('Error: ' + error);
+                });
             });
-        });
-        
-        function displayMetrics(metrics) {
-            const container = document.getElementById('metrics-container');
-            container.innerHTML = '';
             
-            for (const [key, value] of Object.entries(metrics)) {
-                const metricCard = document.createElement('div');
-                metricCard.className = 'metric-card';
+            function displayMetrics(data) {
+                const container = document.getElementById('metrics-container');
+                container.innerHTML = '';
                 
-                const formattedValue = typeof value === 'number' 
-                    ? value.toFixed(4) 
-                    : value;
-                
-                metricCard.innerHTML = `
-                    <div class="metric-name">${key}</div>
-                    <div class="metric-value">${formattedValue}</div>
-                `;
-                
-                container.appendChild(metricCard);
+                for (const [key, value] of Object.entries(data)) {
+                    // Skip the correlation matrix as it's displayed separately
+                    if (key === 'Correlation Matrix') continue;
+                    
+                    const metricCard = document.createElement('div');
+                    metricCard.className = 'metric-card';
+                    
+                    let formattedValue;
+                    if (typeof value === 'number') {
+                        // Format percentages
+                        if (key.includes('Mean') || key.includes('Drawdown')) {
+                            formattedValue = (value * 100).toFixed(2) + '%';
+                        } else {
+                            formattedValue = value.toFixed(4);
+                        }
+                    } else {
+                        formattedValue = value;
+                    }
+                    
+                    metricCard.innerHTML = `
+                        <div class="metric-name">${key}</div>
+                        <div class="metric-value">${formattedValue}</div>
+                    `;
+                    
+                    container.appendChild(metricCard);
+                }
             }
-        }
-        
-        document.getElementById('add-asset-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Here you would implement the logic to add assets to the portfolio
-            const assetName = document.getElementById('asset-name').value;
-            const allocation = document.getElementById('asset-allocation').value;
             
-            alert(`Asset added: ${assetName} with ${allocation}% allocation`);
+            function displayCorrelationMatrix(correlationData, tickers) {
+                const container = document.getElementById('correlation-matrix');
+                container.innerHTML = '';
+                
+                // Create table
+                const table = document.createElement('table');
+                
+                // Create header row
+                const thead = document.createElement('thead');
+                const headerRow = document.createElement('tr');
+                
+                // Empty first cell
+                const emptyHeader = document.createElement('th');
+                headerRow.appendChild(emptyHeader);
+                
+                // Add ticker headers
+                tickers.forEach(ticker => {
+                    const th = document.createElement('th');
+                    th.textContent = ticker;
+                    headerRow.appendChild(th);
+                });
+                
+                thead.appendChild(headerRow);
+                table.appendChild(thead);
+                
+                // Create table body
+                const tbody = document.createElement('tbody');
+                
+                tickers.forEach(ticker => {
+                    const row = document.createElement('tr');
+                    
+                    // First cell is the ticker name
+                    const tickerCell = document.createElement('td');
+                    tickerCell.textContent = ticker;
+                    row.appendChild(tickerCell);
+                    
+                    // Add correlation values
+                    tickers.forEach(otherTicker => {
+                        const td = document.createElement('td');
+                        const value = correlationData[ticker][otherTicker];
+                        td.textContent = value.toFixed(2);
+                        
+                        // Color coding based on correlation strength
+                        if (ticker !== otherTicker) {
+                            if (value > 0.8) {
+                                td.style.backgroundColor = '#ffcccc'; // High positive (red)
+                            } else if (value > 0.5) {
+                                td.style.backgroundColor = '#ffe0cc'; // Moderate positive (orange)
+                            } else if (value < -0.5) {
+                                td.style.backgroundColor = '#ccffcc'; // Negative (green)
+                            }
+                        } else {
+                            td.style.backgroundColor = '#f2f2f2'; // Diagonal (self correlation)
+                        }
+                        
+                        row.appendChild(td);
+                    });
+                    
+                    tbody.appendChild(row);
+                });
+                
+                table.appendChild(tbody);
+                container.appendChild(table);
+            }
             
-            // Reset form
-            this.reset();
+            // Initialize allocation total
+            updateAllocationTotal();
         });
     </script>
 </body>
