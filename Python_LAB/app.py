@@ -41,7 +41,7 @@ def calculate_returns(df):
         df.index = pd.to_datetime(df.index)
 
     # Calculate monthly returns
-    monthly_returns = df['Close'].resample('M').last().pct_change().dropna()
+    monthly_returns = df['Close'].resample('ME').last().pct_change().dropna()
     return monthly_returns
 
 def calculate_portfolio_metrics(tickers, allocations, start_date, end_date, benchmark_ticker=None):
@@ -262,7 +262,7 @@ def calculate_portfolio_metrics(tickers, allocations, start_date, end_date, benc
     corr_matrix = returns_df.corr()
     metrics['Correlation Matrix'] = {
         str(ticker1): {str(ticker2): corr_matrix.loc[ticker1, ticker2] 
-                      for ticker2 in corr_matrix.columns}
+                    for ticker2 in corr_matrix.columns}
         for ticker1 in corr_matrix.index
     }
 
@@ -298,9 +298,38 @@ def analyze_portfolio():
             end_date,
             benchmark_ticker
         )
-        return jsonify(metrics)
+        
+        # Convert NumPy types to Python native types
+        metrics_serializable = convert_to_serializable(metrics)
+        
+        return jsonify(metrics_serializable)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+# Add this helper function to convert NumPy types to Python types
+def convert_to_serializable(obj):
+    """Convert NumPy/Pandas types to Python native types for JSON serialization"""
+    import numpy as np
+    import pandas as pd
+    
+    if isinstance(obj, dict):
+        return {k: convert_to_serializable(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_to_serializable(i) for i in obj]
+    elif isinstance(obj, (np.integer, np.int64)):
+        return int(obj)
+    elif isinstance(obj, (np.floating, np.float64)):
+        return float(obj)
+    elif isinstance(obj, np.ndarray):
+        return convert_to_serializable(obj.tolist())
+    elif isinstance(obj, pd.Series):
+        return convert_to_serializable(obj.to_dict())
+    elif isinstance(obj, pd.DataFrame):
+        return convert_to_serializable(obj.to_dict())
+    elif isinstance(obj, pd.Timestamp):
+        return obj.isoformat()
+    else:
+        return obj
 
 if __name__ == '__main__':
     app.run(debug=True)

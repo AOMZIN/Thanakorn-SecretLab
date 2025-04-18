@@ -170,7 +170,7 @@
 <body>
     <div class="container">
         <h1>Portfolio Optimizer</h1>
-        
+
         <div class="flex-container">
             <div class="column">
                 <div class="card">
@@ -189,12 +189,12 @@
                             <div>%</div>
                         </div>
                     </div>
-                    
+
                     <div class="allocation-total-container">
                         <strong>Total Allocation: <span id="allocation-total">0.00</span>%</strong>
                         <div class="allocation-message">(Must equal 100%)</div>
                     </div>
-                    
+
                     <button id="add-asset-btn">Add Asset</button>
                 </div>
 
@@ -282,43 +282,43 @@
             <div class="column" id="results-column">
                 <div class="card" id="results-card" style="display:none;">
                     <h2>Portfolio Analysis Results</h2>
-                    
+
                     <div class="tabs">
                         <div class="tab active" data-tab="performance">Performance Summary</div>
                         <div class="tab" data-tab="risk">Risk & Return</div>
                         <div class="tab" data-tab="correlation">Correlation</div>
                         <div class="tab" data-tab="advanced">Advanced Metrics</div>
                     </div>
-                    
+
                     <div class="tab-content active" id="performance-tab">
                         <div class="metric-group">
                             <h3>Performance Summary</h3>
                             <div class="metrics-container" id="performance-summary-metrics"></div>
                         </div>
                     </div>
-                    
+
                     <div class="tab-content" id="risk-tab">
                         <div class="metric-group">
                             <h3>Risk and Return Metrics</h3>
                             <div class="metrics-container" id="risk-return-metrics"></div>
                         </div>
                     </div>
-                    
+
                     <div class="tab-content" id="correlation-tab">
                         <div class="correlation-matrix" id="correlation-matrix"></div>
                     </div>
-                    
+
                     <div class="tab-content" id="advanced-tab">
                         <div class="metric-group">
                             <h3>Advanced Risk Metrics</h3>
                             <div class="metrics-container" id="advanced-risk-metrics"></div>
                         </div>
-                        
+
                         <div class="metric-group">
                             <h3>Distribution Statistics</h3>
                             <div class="metrics-container" id="distribution-metrics"></div>
                         </div>
-                        
+
                         <div class="metric-group" id="benchmark-section" style="display:none;">
                             <h3>Benchmark Metrics</h3>
                             <div class="metrics-container" id="benchmark-metrics"></div>
@@ -331,54 +331,56 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            console.log("Document loaded");
+
             // Populate year dropdowns
             const currentYear = new Date().getFullYear();
             const startYearSelect = document.getElementById('start-year');
             const endYearSelect = document.getElementById('end-year');
-            
+
             for (let year = 2000; year <= currentYear; year++) {
                 const startOption = document.createElement('option');
                 startOption.value = year;
                 startOption.textContent = year;
                 startYearSelect.appendChild(startOption);
-                
+
                 const endOption = document.createElement('option');
                 endOption.value = year;
                 endOption.textContent = year;
                 endYearSelect.appendChild(endOption);
             }
-            
+
             // Set default values
             startYearSelect.value = "2006";
             endYearSelect.value = currentYear.toString();
             document.getElementById('end-month').value = "Dec";
-            
+
             // Tabs functionality
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     // Remove active class from all tabs
                     tabs.forEach(t => t.classList.remove('active'));
-                    
+
                     // Add active class to clicked tab
                     this.classList.add('active');
-                    
+
                     // Hide all tab content
                     document.querySelectorAll('.tab-content').forEach(content => {
                         content.classList.remove('active');
                     });
-                    
+
                     // Show content for active tab
                     const tabId = this.getAttribute('data-tab');
                     document.getElementById(tabId + '-tab').classList.add('active');
                 });
             });
-            
+
             // Add asset button functionality
             document.getElementById('add-asset-btn').addEventListener('click', function() {
                 const assetsContainer = document.getElementById('assets-container');
                 const assetCount = assetsContainer.children.length + 1;
-                
+
                 const assetRow = document.createElement('div');
                 assetRow.className = 'asset-row';
                 assetRow.innerHTML = `
@@ -392,31 +394,31 @@
                     </div>
                     <div>%</div>
                 `;
-                
+
                 assetsContainer.appendChild(assetRow);
-                
+
                 // Update allocation total after adding new asset row
                 updateAllocationTotal();
             });
-            
+
             // Real-time allocation total calculation
             document.addEventListener('input', function(e) {
                 if (e.target.classList.contains('allocation-input')) {
                     updateAllocationTotal();
                 }
             });
-            
+
             function updateAllocationTotal() {
                 const allocationInputs = document.querySelectorAll('.allocation-input');
                 let total = 0;
-                
+
                 allocationInputs.forEach(input => {
                     total += parseFloat(input.value) || 0;
                 });
-                
+
                 const totalDisplay = document.getElementById('allocation-total');
                 totalDisplay.textContent = total.toFixed(2);
-                
+
                 // Change color based on whether total equals 100%
                 if (Math.abs(total - 100) < 0.01) {
                     totalDisplay.style.color = 'green';
@@ -424,23 +426,25 @@
                     totalDisplay.style.color = 'red';
                 }
             }
-            
+
             // Analyze button functionality
             document.getElementById('analyze-btn').addEventListener('click', function() {
+                console.log("Analyze button clicked");
+
                 // Collect ticker and allocation data
                 const tickerInputs = document.querySelectorAll('.ticker-input');
                 const allocationInputs = document.querySelectorAll('.allocation-input');
-                
+
                 const tickers = [];
                 const allocations = [];
-                
+
                 let totalAllocation = 0;
                 let hasEmptyFields = false;
-                
+
                 for (let i = 0; i < tickerInputs.length; i++) {
                     const ticker = tickerInputs[i].value.trim();
                     const allocation = parseFloat(allocationInputs[i].value) || 0;
-                    
+
                     if (ticker && allocation > 0) {
                         tickers.push(ticker);
                         allocations.push(allocation);
@@ -450,34 +454,34 @@
                         hasEmptyFields = true;
                     }
                 }
-                
+
                 if (tickers.length < 1) {
                     alert('Please add at least one asset to your portfolio');
                     return;
                 }
-                
+
                 if (hasEmptyFields) {
                     alert('Some assets are missing ticker symbols or allocations');
                     return;
                 }
-                
+
                 // Check if total allocation is exactly 100%
                 if (Math.abs(totalAllocation - 100) > 0.01) {
                     alert('Total allocation must be exactly 100%. Current total: ' + totalAllocation.toFixed(2) + '%');
                     return;
                 }
-                
+
                 // Get configuration
                 const startYear = document.getElementById('start-year').value;
                 const startMonth = document.getElementById('start-month').value;
                 const endYear = document.getElementById('end-year').value;
                 const endMonth = document.getElementById('end-month').value;
                 const benchmarkTicker = document.getElementById('benchmark-ticker').value.trim();
-                
+
                 // Show loading indicator
                 document.getElementById('loading').style.display = 'block';
                 document.getElementById('results-card').style.display = 'none';
-                
+
                 // Send API request
                 fetch('/api/analyze', {
                     method: 'POST',
@@ -496,25 +500,29 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    console.log("API response:", data);
                     document.getElementById('loading').style.display = 'none';
-                    
+
                     if (data.error) {
                         alert('Error: ' + data.error);
                         return;
                     }
-                    
+
                     // Display results
                     displayResults(data, benchmarkTicker);
-                    
+
                     document.getElementById('results-card').style.display = 'block';
                 })
                 .catch(error => {
+                    console.error("API error:", error);
                     document.getElementById('loading').style.display = 'none';
                     alert('Error: ' + error);
                 });
             });
-            
+
             function displayResults(data, benchmarkTicker) {
+                console.log("Displaying results");
+
                 // Clear previous results
                 document.getElementById('performance-summary-metrics').innerHTML = '';
                 document.getElementById('risk-return-metrics').innerHTML = '';
@@ -522,7 +530,7 @@
                 document.getElementById('distribution-metrics').innerHTML = '';
                 document.getElementById('correlation-matrix').innerHTML = '';
                 document.getElementById('benchmark-metrics').innerHTML = '';
-                
+
                 // Organize metrics into categories
                 const performanceMetrics = {
                     'Arithmetic Mean (annual)': formatPercent(data['Arithmetic Mean (annual)']),
@@ -535,7 +543,7 @@
                     'Positive Periods (%)': data['Positive Periods (%)'] ? formatPercent(data['Positive Periods (%)'] / 100) : 'N/A',
                     'Safe Withdrawal Rate': formatPercent(data['Safe Withdrawal Rate'])
                 };
-                
+
                 const riskMetrics = {
                     'Standard Deviation (monthly)': formatPercent(data['Standard Deviation (monthly)']),
                     'Standard Deviation (annual)': formatPercent(data['Standard Deviation (annual)']),
@@ -544,20 +552,20 @@
                     'Sortino Ratio (annual)': formatNumber(data['Sortino Ratio (annual)']),
                     'Calmar Ratio': formatNumber(data['Calmar Ratio'])
                 };
-                
+
                 const advancedRiskMetrics = {
                     'Historical Value-at-Risk (5%)': formatPercent(data['Historical Value-at-Risk (5%)']),
                     'Analytical Value-at-Risk (5%)': formatPercent(data['Analytical Value-at-Risk (5%)']),
                     'Conditional Value-at-Risk (5%)': formatPercent(data['Conditional Value-at-Risk (5%)']),
                     'Gain/Loss Ratio': formatNumber(data['Gain/Loss Ratio'])
                 };
-                
+
                 const distributionMetrics = {
                     'Skewness': formatNumber(data['Skewness']),
                     'Kurtosis': formatNumber(data['Kurtosis']),
                     'Positive Periods': data['Positive Periods'] ? data['Positive Periods'] : 'N/A'
                 };
-                
+
                 // Add benchmark metrics if available
                 let benchmarkMetrics = {};
                 if (benchmarkTicker && data['Benchmark Correlation'] !== undefined) {
@@ -575,27 +583,27 @@
                 } else {
                     document.getElementById('benchmark-section').style.display = 'none';
                 }
-                
+
                 // Display metrics in respective containers
                 displayMetricsGroup(performanceMetrics, 'performance-summary-metrics');
                 displayMetricsGroup(riskMetrics, 'risk-return-metrics');
                 displayMetricsGroup(advancedRiskMetrics, 'advanced-risk-metrics');
                 displayMetricsGroup(distributionMetrics, 'distribution-metrics');
                 displayMetricsGroup(benchmarkMetrics, 'benchmark-metrics');
-                
+
                 // Display correlation matrix if available
                 if (data['Correlation Matrix']) {
                     displayCorrelationMatrix(data['Correlation Matrix']);
                 }
             }
-            
+
             function displayMetricsGroup(metrics, containerId) {
                 const container = document.getElementById(containerId);
-                
+
                 for (const [key, value] of Object.entries(metrics)) {
                     const metricCard = document.createElement('div');
                     metricCard.className = 'metric-card';
-                    
+
                     // Style based on metric type
                     let valueClass = '';
                     if (['Alpha (annualized)', 'Sharpe Ratio (annual)', 'Sortino Ratio (annual)', 'Calmar Ratio', 'Information Ratio'].includes(key) && value !== 'N/A') {
@@ -605,64 +613,75 @@
                         // Lower (less negative) is better
                         valueClass = parseFloat(value) < 0 ? 'red' : '';
                     }
-                    
+
                     metricCard.innerHTML = `
                         <div class="metric-name">${key}</div>
                         <div class="metric-value ${valueClass}">${value}</div>
                     `;
-                    
+
                     container.appendChild(metricCard);
                 }
             }
-            
+
             function displayCorrelationMatrix(correlationData) {
+                console.log("Correlation data structure:", JSON.stringify(correlationData, null, 2));
+
                 const container = document.getElementById('correlation-matrix');
                 container.innerHTML = '';
-                
+
                 // Get tickers from correlation data
                 const tickers = Object.keys(correlationData);
-                
+
                 // Create table
                 const table = document.createElement('table');
-                
+
                 // Create header row
                 const thead = document.createElement('thead');
                 const headerRow = document.createElement('tr');
-                
+
                 // Empty first cell
                 const emptyHeader = document.createElement('th');
                 headerRow.appendChild(emptyHeader);
-                
+
                 // Add ticker headers
                 tickers.forEach(ticker => {
                     const th = document.createElement('th');
                     th.textContent = ticker;
                     headerRow.appendChild(th);
                 });
-                
+
                 thead.appendChild(headerRow);
                 table.appendChild(thead);
-                
+
                 // Create table body
                 const tbody = document.createElement('tbody');
-                
+
                 tickers.forEach(ticker => {
                     const row = document.createElement('tr');
-                    
+
                     // First cell is the ticker name
                     const tickerCell = document.createElement('td');
                     tickerCell.textContent = ticker;
                     row.appendChild(tickerCell);
-                    
+
                     // Add correlation values
                     tickers.forEach(otherTicker => {
                         const td = document.createElement('td');
-                        const value = correlationData[ticker] && correlationData[ticker][otherTicker] 
-                            ? correlationData[ticker][otherTicker] 
-                            : 0;
-                        
+
+                        // Improved error handling for nested properties
+                        let value = 0;
+                        try {
+                            if (correlationData[ticker] &&
+                                typeof correlationData[ticker] === 'object' &&
+                                otherTicker in correlationData[ticker]) {
+                                value = correlationData[ticker][otherTicker];
+                            }
+                        } catch (e) {
+                            console.error("Error accessing correlation data:", e);
+                        }
+
                         td.textContent = typeof value === 'number' ? value.toFixed(2) : 'N/A';
-                        
+
                         // Color coding based on correlation strength
                         if (ticker !== otherTicker) {
                             if (value > 0.8) {
@@ -675,28 +694,28 @@
                         } else {
                             td.style.backgroundColor = '#f2f2f2'; // Diagonal (self correlation)
                         }
-                        
+
                         row.appendChild(td);
                     });
-                    
+
                     tbody.appendChild(row);
                 });
-                
+
                 table.appendChild(tbody);
                 container.appendChild(table);
             }
-            
+
             function formatPercent(value) {
                 if (value === undefined || value === null || isNaN(value)) return 'N/A';
                 return (value * 100).toFixed(2) + '%';
             }
-            
+
             function formatNumber(value) {
                 if (value === undefined || value === null || isNaN(value)) return 'N/A';
                 if (value === Infinity || value === -Infinity) return '∞';
                 return value.toFixed(2);
             }
-            
+
             // Initialize allocation total
             updateAllocationTotal();
         });
