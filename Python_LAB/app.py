@@ -102,8 +102,13 @@ def calculate_portfolio_metrics(tickers, allocations, start_date, end_date):
     # Performance ratios
     metrics['Sharpe Ratio'] = metrics['Arithmetic Mean (annual)'] / metrics['Standard Deviation (annual)']
 
-    # Correlation matrix
-    metrics['Correlation Matrix'] = returns_df.corr().to_dict()
+    # Correlation matrix - Modified to use string keys
+    corr_matrix = returns_df.corr()
+    metrics['Correlation Matrix'] = {
+        str(ticker1): {str(ticker2): corr_matrix.loc[ticker1, ticker2] 
+                      for ticker2 in corr_matrix.columns}
+        for ticker1 in corr_matrix.index
+    }
 
     return metrics
 

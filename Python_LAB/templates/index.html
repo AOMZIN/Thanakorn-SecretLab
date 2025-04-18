@@ -508,8 +508,11 @@
                     // Add correlation values
                     tickers.forEach(otherTicker => {
                         const td = document.createElement('td');
-                        const value = correlationData[ticker][otherTicker];
-                        td.textContent = value.toFixed(2);
+                        // Use safer property access to handle potential undefined values
+                        const value = correlationData[ticker] && correlationData[ticker][otherTicker] 
+                            ? correlationData[ticker][otherTicker] 
+                            : 0;
+                        td.textContent = typeof value === 'number' ? value.toFixed(2) : 'N/A';
                         
                         // Color coding based on correlation strength
                         if (ticker !== otherTicker) {
