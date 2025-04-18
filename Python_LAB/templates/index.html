@@ -15,7 +15,7 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        h1, h2 {
+        h1, h2, h3 {
             color: #333;
         }
         .card {
@@ -129,6 +129,42 @@
             font-size: 0.9em;
             color: #666;
         }
+        .tabs {
+            display: flex;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-bottom: none;
+        }
+        .tab.active {
+            background-color: #f9f9f9;
+            border-color: #ddd;
+            border-bottom-color: #f9f9f9;
+            border-radius: 5px 5px 0 0;
+            margin-bottom: -1px;
+        }
+        .tab-content {
+            display: none;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 0 0 5px 5px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .metric-group {
+            margin-bottom: 20px;
+        }
+        .green {
+            color: green;
+        }
+        .red {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -224,25 +260,15 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="benchmark-ticker">Benchmark Ticker (optional)</label>
+                        <input type="text" id="benchmark-ticker" placeholder="e.g., SPY, ^GSPC">
+                    </div>
+                    <div class="form-group">
                         <label for="optimization-goal">Optimization Goal</label>
                         <select id="optimization-goal">
                             <option value="sharpe">Mean Variance - Maximize Sharpe Ratio</option>
                             <option value="return">Maximize Return</option>
                             <option value="risk">Minimize Risk</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="robust-optimization">Robust Optimization</label>
-                        <select id="robust-optimization">
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="historical-returns">Use Historical Returns</label>
-                        <select id="historical-returns">
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
                         </select>
                     </div>
 
@@ -253,15 +279,51 @@
                 </div>
             </div>
 
-            <div class="column">
-                <div class="card" id="metrics-card" style="display:none;">
-                    <h2>Portfolio Metrics</h2>
-                    <div class="metrics-container" id="metrics-container"></div>
-                </div>
-                
-                <div class="card" id="correlation-card" style="display:none;">
-                    <h2>Correlation Matrix</h2>
-                    <div class="correlation-matrix" id="correlation-matrix"></div>
+            <div class="column" id="results-column">
+                <div class="card" id="results-card" style="display:none;">
+                    <h2>Portfolio Analysis Results</h2>
+                    
+                    <div class="tabs">
+                        <div class="tab active" data-tab="performance">Performance Summary</div>
+                        <div class="tab" data-tab="risk">Risk & Return</div>
+                        <div class="tab" data-tab="correlation">Correlation</div>
+                        <div class="tab" data-tab="advanced">Advanced Metrics</div>
+                    </div>
+                    
+                    <div class="tab-content active" id="performance-tab">
+                        <div class="metric-group">
+                            <h3>Performance Summary</h3>
+                            <div class="metrics-container" id="performance-summary-metrics"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="risk-tab">
+                        <div class="metric-group">
+                            <h3>Risk and Return Metrics</h3>
+                            <div class="metrics-container" id="risk-return-metrics"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="correlation-tab">
+                        <div class="correlation-matrix" id="correlation-matrix"></div>
+                    </div>
+                    
+                    <div class="tab-content" id="advanced-tab">
+                        <div class="metric-group">
+                            <h3>Advanced Risk Metrics</h3>
+                            <div class="metrics-container" id="advanced-risk-metrics"></div>
+                        </div>
+                        
+                        <div class="metric-group">
+                            <h3>Distribution Statistics</h3>
+                            <div class="metrics-container" id="distribution-metrics"></div>
+                        </div>
+                        
+                        <div class="metric-group" id="benchmark-section" style="display:none;">
+                            <h3>Benchmark Metrics</h3>
+                            <div class="metrics-container" id="benchmark-metrics"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -290,6 +352,27 @@
             startYearSelect.value = "2006";
             endYearSelect.value = currentYear.toString();
             document.getElementById('end-month').value = "Dec";
+            
+            // Tabs functionality
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all tab content
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Show content for active tab
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId + '-tab').classList.add('active');
+                });
+            });
             
             // Add asset button functionality
             document.getElementById('add-asset-btn').addEventListener('click', function() {
@@ -389,11 +472,11 @@
                 const startMonth = document.getElementById('start-month').value;
                 const endYear = document.getElementById('end-year').value;
                 const endMonth = document.getElementById('end-month').value;
+                const benchmarkTicker = document.getElementById('benchmark-ticker').value.trim();
                 
                 // Show loading indicator
                 document.getElementById('loading').style.display = 'block';
-                document.getElementById('metrics-card').style.display = 'none';
-                document.getElementById('correlation-card').style.display = 'none';
+                document.getElementById('results-card').style.display = 'none';
                 
                 // Send API request
                 fetch('/api/analyze', {
@@ -407,7 +490,8 @@
                         startYear: startYear,
                         startMonth: startMonth,
                         endYear: endYear,
-                        endMonth: endMonth
+                        endMonth: endMonth,
+                        benchmarkTicker: benchmarkTicker || null
                     })
                 })
                 .then(response => response.json())
@@ -419,17 +503,10 @@
                         return;
                     }
                     
-                    // Display metrics
-                    displayMetrics(data);
+                    // Display results
+                    displayResults(data, benchmarkTicker);
                     
-                    // Display correlation matrix if available
-                    if (data['Correlation Matrix']) {
-                        displayCorrelationMatrix(data['Correlation Matrix'], tickers);
-                    }
-                    
-                    document.getElementById('metrics-card').style.display = 'block';
-                    document.getElementById('correlation-card').style.display = 
-                        data['Correlation Matrix'] ? 'block' : 'none';
+                    document.getElementById('results-card').style.display = 'block';
                 })
                 .catch(error => {
                     document.getElementById('loading').style.display = 'none';
@@ -437,41 +514,113 @@
                 });
             });
             
-            function displayMetrics(data) {
-                const container = document.getElementById('metrics-container');
-                container.innerHTML = '';
+            function displayResults(data, benchmarkTicker) {
+                // Clear previous results
+                document.getElementById('performance-summary-metrics').innerHTML = '';
+                document.getElementById('risk-return-metrics').innerHTML = '';
+                document.getElementById('advanced-risk-metrics').innerHTML = '';
+                document.getElementById('distribution-metrics').innerHTML = '';
+                document.getElementById('correlation-matrix').innerHTML = '';
+                document.getElementById('benchmark-metrics').innerHTML = '';
                 
-                for (const [key, value] of Object.entries(data)) {
-                    // Skip the correlation matrix as it's displayed separately
-                    if (key === 'Correlation Matrix') continue;
-                    
+                // Organize metrics into categories
+                const performanceMetrics = {
+                    'Arithmetic Mean (annual)': formatPercent(data['Arithmetic Mean (annual)']),
+                    'Geometric Mean (annual)': formatPercent(data['Geometric Mean (annual)']),
+                    'Best Month': formatPercent(data['Best Month']),
+                    'Worst Month': formatPercent(data['Worst Month']),
+                    'Best Year': data['Best Year'] ? formatPercent(data['Best Year']) : 'N/A',
+                    'Worst Year': data['Worst Year'] ? formatPercent(data['Worst Year']) : 'N/A',
+                    'Maximum Drawdown': formatPercent(data['Maximum Drawdown']),
+                    'Positive Periods (%)': data['Positive Periods (%)'] ? formatPercent(data['Positive Periods (%)'] / 100) : 'N/A',
+                    'Safe Withdrawal Rate': formatPercent(data['Safe Withdrawal Rate'])
+                };
+                
+                const riskMetrics = {
+                    'Standard Deviation (monthly)': formatPercent(data['Standard Deviation (monthly)']),
+                    'Standard Deviation (annual)': formatPercent(data['Standard Deviation (annual)']),
+                    'Downside Deviation (annual)': formatPercent(data['Downside Deviation (annual)']),
+                    'Sharpe Ratio (annual)': formatNumber(data['Sharpe Ratio (annual)']),
+                    'Sortino Ratio (annual)': formatNumber(data['Sortino Ratio (annual)']),
+                    'Calmar Ratio': formatNumber(data['Calmar Ratio'])
+                };
+                
+                const advancedRiskMetrics = {
+                    'Historical Value-at-Risk (5%)': formatPercent(data['Historical Value-at-Risk (5%)']),
+                    'Analytical Value-at-Risk (5%)': formatPercent(data['Analytical Value-at-Risk (5%)']),
+                    'Conditional Value-at-Risk (5%)': formatPercent(data['Conditional Value-at-Risk (5%)']),
+                    'Gain/Loss Ratio': formatNumber(data['Gain/Loss Ratio'])
+                };
+                
+                const distributionMetrics = {
+                    'Skewness': formatNumber(data['Skewness']),
+                    'Kurtosis': formatNumber(data['Kurtosis']),
+                    'Positive Periods': data['Positive Periods'] ? data['Positive Periods'] : 'N/A'
+                };
+                
+                // Add benchmark metrics if available
+                let benchmarkMetrics = {};
+                if (benchmarkTicker && data['Benchmark Correlation'] !== undefined) {
+                    benchmarkMetrics = {
+                        'Benchmark Correlation': formatNumber(data['Benchmark Correlation']),
+                        'Beta': formatNumber(data['Beta']),
+                        'Alpha (annualized)': formatPercent(data['Alpha (annualized)']),
+                        'R-squared': formatPercent(data['R-squared']),
+                        'Tracking Error (annual)': formatPercent(data['Tracking Error (annual)']),
+                        'Information Ratio': formatNumber(data['Information Ratio']),
+                        'Upside Capture Ratio (%)': data['Upside Capture Ratio (%)'] ? formatPercent(data['Upside Capture Ratio (%)'] / 100) : 'N/A',
+                        'Downside Capture Ratio (%)': data['Downside Capture Ratio (%)'] ? formatPercent(data['Downside Capture Ratio (%)'] / 100) : 'N/A'
+                    };
+                    document.getElementById('benchmark-section').style.display = 'block';
+                } else {
+                    document.getElementById('benchmark-section').style.display = 'none';
+                }
+                
+                // Display metrics in respective containers
+                displayMetricsGroup(performanceMetrics, 'performance-summary-metrics');
+                displayMetricsGroup(riskMetrics, 'risk-return-metrics');
+                displayMetricsGroup(advancedRiskMetrics, 'advanced-risk-metrics');
+                displayMetricsGroup(distributionMetrics, 'distribution-metrics');
+                displayMetricsGroup(benchmarkMetrics, 'benchmark-metrics');
+                
+                // Display correlation matrix if available
+                if (data['Correlation Matrix']) {
+                    displayCorrelationMatrix(data['Correlation Matrix']);
+                }
+            }
+            
+            function displayMetricsGroup(metrics, containerId) {
+                const container = document.getElementById(containerId);
+                
+                for (const [key, value] of Object.entries(metrics)) {
                     const metricCard = document.createElement('div');
                     metricCard.className = 'metric-card';
                     
-                    let formattedValue;
-                    if (typeof value === 'number') {
-                        // Format percentages
-                        if (key.includes('Mean') || key.includes('Drawdown')) {
-                            formattedValue = (value * 100).toFixed(2) + '%';
-                        } else {
-                            formattedValue = value.toFixed(4);
-                        }
-                    } else {
-                        formattedValue = value;
+                    // Style based on metric type
+                    let valueClass = '';
+                    if (['Alpha (annualized)', 'Sharpe Ratio (annual)', 'Sortino Ratio (annual)', 'Calmar Ratio', 'Information Ratio'].includes(key) && value !== 'N/A') {
+                        // Higher is better
+                        valueClass = parseFloat(value) > 0 ? 'green' : 'red';
+                    } else if (['Maximum Drawdown', 'Value-at-Risk', 'Downside'].some(term => key.includes(term)) && value !== 'N/A') {
+                        // Lower (less negative) is better
+                        valueClass = parseFloat(value) < 0 ? 'red' : '';
                     }
                     
                     metricCard.innerHTML = `
                         <div class="metric-name">${key}</div>
-                        <div class="metric-value">${formattedValue}</div>
+                        <div class="metric-value ${valueClass}">${value}</div>
                     `;
                     
                     container.appendChild(metricCard);
                 }
             }
             
-            function displayCorrelationMatrix(correlationData, tickers) {
+            function displayCorrelationMatrix(correlationData) {
                 const container = document.getElementById('correlation-matrix');
                 container.innerHTML = '';
+                
+                // Get tickers from correlation data
+                const tickers = Object.keys(correlationData);
                 
                 // Create table
                 const table = document.createElement('table');
@@ -508,10 +657,10 @@
                     // Add correlation values
                     tickers.forEach(otherTicker => {
                         const td = document.createElement('td');
-                        // Use safer property access to handle potential undefined values
                         const value = correlationData[ticker] && correlationData[ticker][otherTicker] 
                             ? correlationData[ticker][otherTicker] 
                             : 0;
+                        
                         td.textContent = typeof value === 'number' ? value.toFixed(2) : 'N/A';
                         
                         // Color coding based on correlation strength
@@ -535,6 +684,17 @@
                 
                 table.appendChild(tbody);
                 container.appendChild(table);
+            }
+            
+            function formatPercent(value) {
+                if (value === undefined || value === null || isNaN(value)) return 'N/A';
+                return (value * 100).toFixed(2) + '%';
+            }
+            
+            function formatNumber(value) {
+                if (value === undefined || value === null || isNaN(value)) return 'N/A';
+                if (value === Infinity || value === -Infinity) return '∞';
+                return value.toFixed(2);
             }
             
             // Initialize allocation total
