@@ -1,0 +1,93 @@
+Attribute,Value
+longBusinessSummary,The trust holds London Bars and Physical Gold of other specifications without numismatic value. It receives gold deposited by Authorized Participants in exchange for the creation of Baskets and delivers gold to Authorized Participants in exchange for Baskets surrendered to it for redemption.
+companyOfficers,[]
+executiveTeam,[]
+maxAge,86400
+priceHint,2
+previousClose,32.96
+open,32.84
+dayLow,32.46
+dayHigh,32.9138
+regularMarketPreviousClose,32.96
+regularMarketOpen,32.84
+regularMarketDayLow,32.46
+regularMarketDayHigh,32.9138
+volume,2046234
+regularMarketVolume,2046234
+averageVolume,1728200
+averageVolume10days,2658170
+averageDailyVolume10Day,2658170
+bid,32.69
+ask,32.82
+bidSize,40
+askSize,280
+yield,0.0
+totalAssets,1294329600
+fiftyTwoWeekLow,22.55
+fiftyTwoWeekHigh,33.02
+fiftyDayAverage,29.6802
+twoHundredDayAverage,26.68235
+trailingAnnualDividendRate,0.0
+trailingAnnualDividendYield,0.0
+navPrice,32.83
+currency,USD
+tradeable,False
+category,Commodities Focused
+ytdReturn,19.2561
+beta3Year,0.32
+fundFamily,Goldman Sachs
+fundInceptionDate,1532390400
+legalType,Exchange Traded Fund
+threeYearAverageReturn,0.1893717
+fiveYearAverageReturn,0.1397124
+quoteType,ETF
+symbol,AAAU
+language,en-US
+region,US
+typeDisp,ETF
+quoteSourceName,Nasdaq Real Time Price
+triggerable,True
+customPriceAlertConfidence,HIGH
+exchange,BTS
+messageBoardId,finmb_552599180
+exchangeTimezoneName,America/New_York
+exchangeTimezoneShortName,EDT
+gmtOffSetMilliseconds,-14400000
+market,us_market
+esgPopulated,False
+corporateActions,[]
+postMarketTime,1744933637
+regularMarketTime,1744920000
+shortName,Goldman Sachs Physical Gold ETF
+longName,Goldman Sachs Physical Gold ETF
+cryptoTradeable,False
+regularMarketChangePercent,-0.424755
+regularMarketPrice,32.82
+marketState,CLOSED
+fullExchangeName,Cboe US
+averageDailyVolume3Month,1728200
+fiftyTwoWeekLowChange,10.27
+fiftyTwoWeekLowChangePercent,0.45543242
+fiftyTwoWeekRange,22.55 - 33.02
+fiftyTwoWeekHighChange,-0.20000076
+fiftyTwoWeekHighChangePercent,-0.0060569583
+fiftyTwoWeekChangePercent,38.832485
+dividendYield,0.0
+trailingThreeMonthReturns,19.2561
+trailingThreeMonthNavReturns,19.2561
+netAssets,1294329600.0
+fiftyDayAverageChange,3.139799
+fiftyDayAverageChangePercent,0.105787665
+twoHundredDayAverageChange,6.1376495
+twoHundredDayAverageChangePercent,0.23002657
+netExpenseRatio,0.18
+sourceInterval,15
+exchangeDataDelayedBy,0
+hasPrePostMarketData,True
+firstTradeDateMilliseconds,1534339800000
+postMarketChangePercent,0.517983
+postMarketPrice,32.99
+postMarketChange,0.170002
+regularMarketChange,-0.139999
+regularMarketDayRange,32.46 - 32.9138
+trailingPegRatio,

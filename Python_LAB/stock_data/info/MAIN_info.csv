@@ -1,0 +1,173 @@
+Attribute,Value
+address1,1300 Post Oak Boulevard
+address2,8th Floor
+city,Houston
+state,TX
+zip,77056
+country,United States
+phone,713 350 6000
+fax,713 350 6042
+website,https://www.mainstcapital.com
+industry,Asset Management
+industryKey,asset-management
+industryDisp,Asset Management
+sector,Financial Services
+sectorKey,financial-services
+sectorDisp,Financial Services
+longBusinessSummary,"Main Street Capital Corporation is a business development company specializes in equity capital to lower middle market companies. The firm specializing in recapitalizations, management buyouts, refinancing, family estate planning, management buyouts, refinancing, industry consolidation, mature, later stage emerging growth. The firm also provides debt capital to middle market companies for acquisitions, management buyouts, growth financings, recapitalizations, and refinancing. The firm seeks to partner with entrepreneurs, business owners and management teams and generally provides ""one stop"" financing alternatives within its lower middle market portfolio. It prefers to invest in air freight and logistics, auto components, building products, chemicals, commercial services, computers, construction and engineering, consumer finance, consumer services, electronic equipment, energy equipment and services, financial services, health care equipment, health care providers, hotels, restaurants, and leisure, internet software and services, IT Services, machinery, oil, gas and consumable fuels, paper and forest products, professional and industrial services, road and rail, software, specialty retail, telecommunication, consumer discretionary, energy, materials, technology, and transportation. The firm typically invests in lower middle market companies ranging between $5 million and $125 million in equity investment with annual revenues between $10 million and $150 million and EBITDA in ranging between $3 million and $20 million. The firm typically prefers to invest in the range of $5 million and $150 million per transaction in debt investment value but holds the ability to lead debt financings up to $250 million and invests between $10 million and $150 million in credit solutions with EBITDA in the range of $5 million and $75 million for credit solutions. The firm's middle market debt investments are made in businesses that are generally larger in size than its lower middle market portfolio companies. It takes 5 percent minority and up to 50 percent majority equity investments. Main Street Capital Corporation was founded in 2007 and is based in Houston, Texas with an additional office in Chojnów, Poland."
+fullTimeEmployees,104
+companyOfficers,"[{'maxAge': 1, 'name': 'Mr. Dwayne Louis Hyzak CPA', 'age': 51, 'title': 'CEO & Director', 'yearBorn': 1973, 'fiscalYear': 2024, 'totalPay': 4519096, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. David L. Magdol', 'age': 53, 'title': 'President, Chief Investment Officer & Senior MD', 'yearBorn': 1971, 'fiscalYear': 2024, 'totalPay': 3339395, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Ryan Robert Nelson', 'age': 40, 'title': 'CFO & Treasurer', 'yearBorn': 1984, 'fiscalYear': 2024, 'totalPay': 781462, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Jesse Enrique Morris', 'age': 56, 'title': 'Executive VP, COO & Senior MD', 'yearBorn': 1968, 'fiscalYear': 2024, 'totalPay': 3174395, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Jason B. Beauvais J.D.', 'age': 48, 'title': 'Executive VP, General Counsel & Secretary', 'yearBorn': 1976, 'fiscalYear': 2024, 'totalPay': 2295645, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Ryan H. McHugh', 'age': 47, 'title': 'Chief Accounting Officer, VP & Assistant Treasurer', 'yearBorn': 1977, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Ken  Dennard', 'title': 'Investor Relations Contact', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Kristin  Rininger', 'age': 43, 'title': 'Chief Compliance Officer & Deputy General Counsel', 'yearBorn': 1981, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Ashley  Seatter', 'title': 'Business Development and Marketing Senior Associate', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Margaret  Kopko', 'title': 'Human Resource Manager', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}]"
+compensationAsOfEpochDate,1735603200
+irWebsite,http://ir.mainstcapital.com/
+executiveTeam,[]
+maxAge,86400
+priceHint,2
+previousClose,52.75
+open,52.85
+dayLow,52.9936
+dayHigh,53.9217
+regularMarketPreviousClose,52.75
+regularMarketOpen,52.85
+regularMarketDayLow,52.9936
+regularMarketDayHigh,53.9217
+dividendRate,4.2
+dividendYield,7.88
+exDividendDate,1746662400
+payoutRatio,0.7043
+fiveYearAvgDividendYield,6.41
+beta,0.98
+trailingPE,9.111111
+forwardPE,13.8082905
+volume,605042
+regularMarketVolume,605042
+averageVolume,592393
+averageVolume10days,830320
+averageDailyVolume10Day,830320
+bid,53.34
+ask,53.3
+bidSize,8
+askSize,29
+marketCap,4720119808
+fiftyTwoWeekLow,45.0
+fiftyTwoWeekHigh,63.32
+priceToSalesTrailing12Months,8.724386
+fiftyDayAverage,57.5014
+twoHundredDayAverage,54.0923
+trailingAnnualDividendRate,2.91
+trailingAnnualDividendYield,0.05516588
+currency,USD
+tradeable,False
+enterpriseValue,6775775232
+profitMargins,0.9391
+floatShares,85137073
+sharesOutstanding,88557600
+sharesShort,3401621
+sharesShortPriorMonth,3291413
+sharesShortPreviousMonthDate,1740700800
+dateShortInterest,1743379200
+sharesPercentSharesOut,0.038399998
+heldPercentInsiders,0.03893
+heldPercentInstitutions,0.22785
+shortRatio,5.52
+shortPercentOfFloat,0.04
+impliedSharesOutstanding,88557600
+bookValue,31.65
+priceToBook,1.6840442
+lastFiscalYearEnd,1735603200
+nextFiscalYearEnd,1767139200
+mostRecentQuarter,1735603200
+earningsQuarterlyGrowth,0.253
+netIncomeToCommon,508080000
+trailingEps,5.85
+forwardEps,3.86
+enterpriseToRevenue,12.524
+52WeekChange,0.1192776
+SandP52WeekChange,0.0635103
+lastDividendValue,0.25
+lastDividendDate,1744070400
+quoteType,EQUITY
+currentPrice,53.3
+targetHighPrice,62.0
+targetLowPrice,51.0
+targetMeanPrice,56.25
+targetMedianPrice,56.0
+recommendationMean,3.0
+recommendationKey,hold
+numberOfAnalystOpinions,4
+totalCash,78251000
+totalCashPerShare,0.884
+totalDebt,2133979008
+quickRatio,1.687
+currentRatio,1.687
+totalRevenue,541025984
+debtToEquity,76.272
+revenuePerShare,6.233
+returnOnAssets,0.062529996
+returnOnEquity,0.19263001
+grossProfits,541025984
+freeCashflow,240558880
+operatingCashflow,-87118000
+earningsGrowth,0.197
+revenueGrowth,0.086
+grossMargins,1.0
+ebitdaMargins,0.0
+operatingMargins,0.88558
+financialCurrency,USD
+symbol,MAIN
+language,en-US
+region,US
+typeDisp,Equity
+quoteSourceName,Nasdaq Real Time Price
+triggerable,True
+customPriceAlertConfidence,HIGH
+hasPrePostMarketData,True
+firstTradeDateMilliseconds,1191936600000
+corporateActions,"[{'header': 'Dividend', 'message': 'MAIN announced a cash dividend of 0.25 with an ex-date of May. 8, 2025', 'meta': {'eventType': 'DIVIDEND', 'dateEpochMs': 1746676800000, 'amount': '0.25'}}]"
+postMarketTime,1744933607
+regularMarketTime,1744920002
+exchange,NYQ
+messageBoardId,finmb_623915
+exchangeTimezoneName,America/New_York
+exchangeTimezoneShortName,EDT
+gmtOffSetMilliseconds,-14400000
+market,us_market
+esgPopulated,False
+regularMarketChangePercent,1.04265
+regularMarketPrice,53.3
+shortName,Main Street Capital Corporation
+longName,Main Street Capital Corporation
+postMarketChangePercent,0.337712
+postMarketPrice,53.48
+postMarketChange,0.18
+regularMarketChange,0.549999
+regularMarketDayRange,52.9936 - 53.9217
+fullExchangeName,NYSE
+averageDailyVolume3Month,592393
+fiftyTwoWeekLowChange,8.299999
+fiftyTwoWeekLowChangePercent,0.18444443
+fiftyTwoWeekRange,45.0 - 63.32
+fiftyTwoWeekHighChange,-10.02
+fiftyTwoWeekHighChangePercent,-0.15824385
+fiftyTwoWeekChangePercent,11.927759
+dividendDate,1749772800
+earningsTimestamp,1746734400
+earningsTimestampStart,1746734400
+earningsTimestampEnd,1746734400
+earningsCallTimestampStart,1746799200
+earningsCallTimestampEnd,1746799200
+isEarningsDateEstimate,False
+epsTrailingTwelveMonths,5.85
+epsForward,3.86
+epsCurrentYear,4.05231
+priceEpsCurrentYear,13.152991
+fiftyDayAverageChange,-4.2014008
+fiftyDayAverageChangePercent,-0.07306606
+twoHundredDayAverageChange,-0.7923012
+twoHundredDayAverageChangePercent,-0.014647208
+sourceInterval,15
+exchangeDataDelayedBy,0
+averageAnalystRating,3.0 - Hold
+cryptoTradeable,False
+marketState,CLOSED
+displayName,Main Street Capital
+trailingPegRatio,

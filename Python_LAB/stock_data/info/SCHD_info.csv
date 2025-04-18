@@ -1,0 +1,96 @@
+Attribute,Value
+phone,1-800-435-4000
+longBusinessSummary,"To pursue its goal, the fund generally invests in stocks that are included in the index. The index is designed to measure the performance of high dividend yielding stocks issued by U.S. companies that have a record of consistently paying dividends, selected for fundamental strength relative to their peers, based on financial ratios. The fund will invest at least 90% of its net assets in these stocks."
+companyOfficers,[]
+executiveTeam,[]
+maxAge,86400
+priceHint,2
+previousClose,25.13
+open,25.21
+dayLow,25.19
+dayHigh,25.63
+regularMarketPreviousClose,25.13
+regularMarketOpen,25.21
+regularMarketDayLow,25.19
+regularMarketDayHigh,25.63
+trailingPE,14.930867
+volume,15350648
+regularMarketVolume,15350648
+averageVolume,18033790
+averageVolume10days,31339350
+averageDailyVolume10Day,31339350
+bid,25.43
+ask,25.44
+bidSize,40
+askSize,280
+yield,0.0372
+totalAssets,70771695616
+fiftyTwoWeekLow,23.87
+fiftyTwoWeekHigh,29.72
+fiftyDayAverage,27.3836
+twoHundredDayAverage,27.721884
+trailingAnnualDividendRate,0.0
+trailingAnnualDividendYield,0.0
+navPrice,25.12
+currency,USD
+tradeable,False
+category,Large Value
+ytdReturn,3.22364
+beta3Year,0.74
+fundFamily,Schwab ETFs
+fundInceptionDate,1319068800
+legalType,Exchange Traded Fund
+threeYearAverageReturn,0.022807099
+fiveYearAverageReturn,0.1317439
+quoteType,ETF
+symbol,SCHD
+language,en-US
+region,US
+typeDisp,ETF
+quoteSourceName,Nasdaq Real Time Price
+triggerable,True
+customPriceAlertConfidence,HIGH
+sourceInterval,15
+exchangeDataDelayedBy,0
+cryptoTradeable,False
+fiftyTwoWeekLowChangePercent,0.06493503
+fiftyTwoWeekRange,23.87 - 29.72
+fiftyTwoWeekHighChange,-4.299999
+fiftyTwoWeekHighChangePercent,-0.14468369
+fiftyTwoWeekChangePercent,-0.5088091
+dividendYield,3.72
+trailingThreeMonthReturns,3.22364
+trailingThreeMonthNavReturns,3.22364
+netAssets,70771696000.0
+epsTrailingTwelveMonths,1.7025133
+fiftyDayAverageChange,-1.9636002
+fiftyDayAverageChangePercent,-0.07170716
+twoHundredDayAverageChange,-2.3018837
+twoHundredDayAverageChangePercent,-0.083034895
+netExpenseRatio,0.06
+hasPrePostMarketData,True
+firstTradeDateMilliseconds,1319117400000
+postMarketChangePercent,0.432733
+postMarketPrice,25.53
+postMarketChange,0.110001
+regularMarketChange,0.290001
+regularMarketDayRange,25.19 - 25.63
+fullExchangeName,NYSEArca
+averageDailyVolume3Month,18033790
+fiftyTwoWeekLowChange,1.5499992
+marketState,CLOSED
+corporateActions,[]
+postMarketTime,1744934390
+regularMarketTime,1744920003
+exchange,PCX
+messageBoardId,finmb_141947998
+exchangeTimezoneName,America/New_York
+exchangeTimezoneShortName,EDT
+gmtOffSetMilliseconds,-14400000
+market,us_market
+esgPopulated,False
+regularMarketChangePercent,1.154
+regularMarketPrice,25.42
+shortName,Schwab US Dividend Equity ETF
+longName,Schwab U.S. Dividend Equity ETF
+trailingPegRatio,

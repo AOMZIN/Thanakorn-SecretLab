@@ -1,0 +1,94 @@
+Attribute,Value
+phone,1-800-474-2737
+longBusinessSummary,"The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The underlying index is a subset of the Morningstar® U.S. Market IndexSM, which is a broad market index that represents approximately 97% of the market capitalization of publicly-traded U.S. stocks."
+companyOfficers,[]
+executiveTeam,[]
+maxAge,86400
+priceHint,2
+previousClose,57.94
+open,57.93
+dayLow,57.93
+dayHigh,58.7121
+regularMarketPreviousClose,57.94
+regularMarketOpen,57.93
+regularMarketDayLow,57.93
+regularMarketDayHigh,58.7121
+trailingPE,19.812887
+volume,1327546
+regularMarketVolume,1327546
+averageVolume,2201277
+averageVolume10days,4359650
+averageDailyVolume10Day,4359650
+bid,58.2
+ask,58.21
+bidSize,9
+askSize,11
+yield,0.0224
+totalAssets,30410762240
+fiftyTwoWeekLow,54.09
+fiftyTwoWeekHigh,65.08
+fiftyDayAverage,61.659
+twoHundredDayAverage,61.80715
+navPrice,57.93214
+currency,USD
+tradeable,False
+category,Large Value
+ytdReturn,1.31543
+beta3Year,0.81
+fundFamily,iShares
+fundInceptionDate,1402358400
+legalType,Exchange Traded Fund
+threeYearAverageReturn,0.058251902
+fiveYearAverageReturn,0.1346747
+quoteType,ETF
+symbol,DGRO
+language,en-US
+region,US
+typeDisp,ETF
+quoteSourceName,Delayed Quote
+triggerable,True
+customPriceAlertConfidence,HIGH
+corporateActions,[]
+postMarketTime,1744934126
+regularMarketTime,1744920000
+marketState,CLOSED
+exchange,PCX
+messageBoardId,finmb_263934819
+exchangeTimezoneName,America/New_York
+exchangeTimezoneShortName,EDT
+gmtOffSetMilliseconds,-14400000
+market,us_market
+esgPopulated,False
+regularMarketChangePercent,0.483263
+regularMarketPrice,58.22
+shortName,iShares Core Dividend Growth ET
+longName,iShares Core Dividend Growth ETF
+postMarketChangePercent,1.820676
+postMarketPrice,59.28
+postMarketChange,1.0599976
+regularMarketChange,0.280003
+regularMarketDayRange,57.93 - 58.7121
+fullExchangeName,NYSEArca
+averageDailyVolume3Month,2201277
+fiftyTwoWeekLowChange,4.130001
+fiftyTwoWeekLowChangePercent,0.07635424
+fiftyTwoWeekRange,54.09 - 65.08
+fiftyTwoWeekHighChange,-6.8600006
+fiftyTwoWeekHighChangePercent,-0.105408736
+fiftyTwoWeekChangePercent,4.5054793
+dividendYield,2.24
+trailingThreeMonthReturns,1.31543
+trailingThreeMonthNavReturns,1.31543
+netAssets,30410762200.0
+epsTrailingTwelveMonths,2.9384916
+fiftyDayAverageChange,-3.4389992
+fiftyDayAverageChangePercent,-0.055774488
+twoHundredDayAverageChange,-3.5871506
+twoHundredDayAverageChangePercent,-0.05803779
+netExpenseRatio,0.08
+sourceInterval,15
+exchangeDataDelayedBy,0
+hasPrePostMarketData,True
+firstTradeDateMilliseconds,1402579800000
+cryptoTradeable,False
+trailingPegRatio,

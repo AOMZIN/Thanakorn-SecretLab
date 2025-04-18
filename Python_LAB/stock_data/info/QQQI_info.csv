@@ -1,0 +1,93 @@
+Attribute,Value
+phone,9144435008
+longBusinessSummary,"The fund is an actively-managed exchange-traded fund (“ETF”) that seeks to achieve its investment objective by investing in a portfolio of stocks that make up the Nasdaq-100® Index and a call options strategy, that consists of written (sold) call options on the Nasdaq-100® Index. Under normal circumstances, at least 80% of the fund’s net assets, plus borrowings for investment purposes, will be invested in securities, or derivative instruments linked to securities, of companies that are included in the reference index."
+companyOfficers,[]
+executiveTeam,[]
+maxAge,86400
+priceHint,2
+previousClose,45.32
+open,45.56
+dayLow,45.06
+dayHigh,45.6484
+regularMarketPreviousClose,45.32
+regularMarketOpen,45.56
+regularMarketDayLow,45.06
+regularMarketDayHigh,45.6484
+trailingPE,28.739548
+volume,476407
+regularMarketVolume,476407
+averageVolume,669337
+averageVolume10days,1228700
+averageDailyVolume10Day,1228700
+bid,45.3
+ask,45.33
+bidSize,18
+askSize,18
+yield,0.1551
+totalAssets,1144322432
+fiftyTwoWeekLow,41.17
+fiftyTwoWeekHigh,54.47
+fiftyDayAverage,49.5058
+twoHundredDayAverage,51.1307
+navPrice,45.289
+currency,USD
+tradeable,False
+category,Derivative Income
+ytdReturn,-6.1408
+beta3Year,0.0
+fundFamily,Neos Funds
+fundInceptionDate,1706486400
+legalType,Exchange Traded Fund
+quoteType,ETF
+symbol,QQQI
+language,en-US
+region,US
+typeDisp,ETF
+quoteSourceName,Nasdaq Real Time Price
+triggerable,True
+customPriceAlertConfidence,HIGH
+hasPrePostMarketData,True
+firstTradeDateMilliseconds,1706625000000
+postMarketChangePercent,0.176557
+postMarketPrice,45.39
+postMarketChange,0.079998
+regularMarketChange,-0.0099983215
+regularMarketDayRange,45.06 - 45.6484
+fullExchangeName,NasdaqGM
+averageDailyVolume3Month,669337
+fiftyTwoWeekLowChange,4.140003
+shortName,NEOS Nasdaq 100 High Income ETF
+longName,NEOS NASDAQ-100(R) High Income ETF
+fiftyTwoWeekLowChangePercent,0.10055874
+fiftyTwoWeekRange,41.17 - 54.47
+fiftyTwoWeekHighChange,-9.16
+fiftyTwoWeekHighChangePercent,-0.16816595
+fiftyTwoWeekChangePercent,-5.800414
+dividendYield,15.51
+trailingThreeMonthReturns,-6.1408
+trailingThreeMonthNavReturns,-6.1408
+netAssets,1144322430.0
+epsTrailingTwelveMonths,1.5765733
+fiftyDayAverageChange,-4.195797
+fiftyDayAverageChangePercent,-0.08475365
+twoHundredDayAverageChange,-5.820698
+twoHundredDayAverageChangePercent,-0.11383959
+netExpenseRatio,0.68
+sourceInterval,15
+exchangeDataDelayedBy,0
+ipoExpectedDate,2024-01-30
+cryptoTradeable,False
+corporateActions,[]
+postMarketTime,1744934368
+regularMarketTime,1744920001
+marketState,CLOSED
+exchange,NGM
+messageBoardId,finmb_1867487640
+exchangeTimezoneName,America/New_York
+exchangeTimezoneShortName,EDT
+gmtOffSetMilliseconds,-14400000
+market,us_market
+esgPopulated,False
+regularMarketChangePercent,-0.02206161
+regularMarketPrice,45.31
+trailingPegRatio,

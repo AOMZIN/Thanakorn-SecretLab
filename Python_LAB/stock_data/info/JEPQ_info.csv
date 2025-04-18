@@ -1,0 +1,92 @@
+Attribute,Value
+phone,(800) 480-4111
+longBusinessSummary,"The fund seeks to achieve this objective by (1) creating an actively managed portfolio of equity securities comprised significantly of those included in the fund’s primary benchmark, the Nasdaq-100 Index® (the Benchmark), and (2) through equity-linked notes (ELNs), selling call options with exposure to the Benchmark. It is non-diversified."
+companyOfficers,[]
+executiveTeam,[]
+maxAge,86400
+priceHint,2
+previousClose,48.76
+open,49.05
+dayLow,48.48
+dayHigh,49.055
+regularMarketPreviousClose,48.76
+regularMarketOpen,49.05
+regularMarketDayLow,48.48
+regularMarketDayHigh,49.055
+trailingPE,28.275461
+volume,4144426
+regularMarketVolume,4144426
+averageVolume,6949085
+averageVolume10days,11793240
+averageDailyVolume10Day,11793240
+bid,48.7
+ask,52.73
+bidSize,3
+askSize,2
+yield,0.1092
+totalAssets,22733934592
+fiftyTwoWeekLow,44.311
+fiftyTwoWeekHigh,58.54
+fiftyDayAverage,53.3607
+twoHundredDayAverage,54.744576
+navPrice,48.7305
+currency,USD
+tradeable,False
+category,Derivative Income
+ytdReturn,-6.5652
+beta3Year,0.0
+fundFamily,JPMorgan
+fundInceptionDate,1651536000
+legalType,Exchange Traded Fund
+quoteType,ETF
+symbol,JEPQ
+language,en-US
+region,US
+typeDisp,ETF
+quoteSourceName,Nasdaq Real Time Price
+triggerable,True
+customPriceAlertConfidence,HIGH
+hasPrePostMarketData,True
+firstTradeDateMilliseconds,1651671000000
+corporateActions,[]
+postMarketTime,1744934374
+regularMarketTime,1744920001
+exchange,NGM
+messageBoardId,finmb_1771574239
+exchangeTimezoneName,America/New_York
+exchangeTimezoneShortName,EDT
+gmtOffSetMilliseconds,-14400000
+market,us_market
+esgPopulated,False
+regularMarketChangePercent,-0.041010343
+regularMarketPrice,48.74
+shortName,JPMorgan Nasdaq Equity Premium 
+longName,JPMorgan Nasdaq Equity Premium Income ETF
+postMarketChangePercent,0.594988
+postMarketPrice,49.03
+postMarketChange,0.289997
+regularMarketChange,-0.019996643
+regularMarketDayRange,48.48 - 49.055
+fullExchangeName,NasdaqGM
+averageDailyVolume3Month,6949085
+fiftyTwoWeekLowChange,4.429001
+fiftyTwoWeekLowChangePercent,0.09995262
+fiftyTwoWeekRange,44.311 - 58.54
+fiftyTwoWeekHighChange,-9.799999
+fiftyTwoWeekHighChangePercent,-0.16740689
+fiftyTwoWeekChangePercent,-4.1306076
+dividendYield,10.92
+trailingThreeMonthReturns,-6.5652
+trailingThreeMonthNavReturns,-6.5652
+netAssets,22733934600.0
+epsTrailingTwelveMonths,1.7237562
+fiftyDayAverageChange,-4.620697
+fiftyDayAverageChangePercent,-0.086593635
+twoHundredDayAverageChange,-6.004574
+twoHundredDayAverageChangePercent,-0.10968345
+netExpenseRatio,0.35
+sourceInterval,15
+exchangeDataDelayedBy,0
+cryptoTradeable,False
+marketState,CLOSED
+trailingPegRatio,

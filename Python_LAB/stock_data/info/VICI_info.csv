@@ -1,0 +1,179 @@
+Attribute,Value
+address1,535 Madison Avenue
+address2,20th Floor
+city,New York
+state,NY
+zip,10022-2203
+country,United States
+phone,646 949 4631
+website,https://www.viciproperties.com
+industry,REIT - Diversified
+industryKey,reit-diversified
+industryDisp,REIT - Diversified
+sector,Real Estate
+sectorKey,real-estate
+sectorDisp,Real Estate
+longBusinessSummary,"VICI Properties Inc. is an S&P 500 experiential real estate investment trust that owns one of the largest portfolios of market-leading gaming, hospitality and entertainment destinations, including Caesars Palace Las Vegas, MGM Grand and the Venetian Resort Las Vegas, three of the most iconic entertainment facilities on the Las Vegas Strip. VICI Properties owns 93 experiential assets across a geographically diverse portfolio consisting of 54 gaming properties and 39 other experiential properties across the United States and Canada. The portfolio is comprised of approximately 127 million square feet and features approximately 60,300 hotel rooms and over 500 restaurants, bars, nightclubs and sportsbooks. Its properties are occupied by industry-leading gaming, leisure and hospitality operators under long-term, triple-net lease agreements. VICI Properties has a growing array of real estate and financing partnerships with leading operators in other experiential sectors, including Bowlero, Cabot, Canyon Ranch, Chelsea Piers, Great Wolf Resorts, Homefield and Kalahari Resorts. VICI Properties also owns four championship golf courses and 33 acres of undeveloped and underdeveloped land adjacent to the Las Vegas Strip. VICI Properties' goal is to own the highest quality and most productive experiential real estate portfolio through a strategy of partnering with the highest quality experiential place makers and operators."
+fullTimeEmployees,27
+companyOfficers,"[{'maxAge': 1, 'name': 'Mr. Edward Baltazar Pitoniak', 'age': 68, 'title': 'CEO & Director', 'yearBorn': 1956, 'fiscalYear': 2024, 'totalPay': 5528318, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. John W. R. Payne', 'age': 56, 'title': 'President & COO', 'yearBorn': 1968, 'fiscalYear': 2024, 'totalPay': 3738715, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. David Andrew Kieske', 'age': 53, 'title': 'Executive VP, CFO & Treasurer', 'yearBorn': 1971, 'fiscalYear': 2024, 'totalPay': 2453929, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Samantha Sacks Gallagher J.D.', 'age': 47, 'title': 'Executive VP, General Counsel & Secretary', 'yearBorn': 1977, 'fiscalYear': 2024, 'totalPay': 2121515, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Gabriel F. Wasserman', 'age': 40, 'title': 'Senior VP, Chief Accounting Officer & MD of V.E.C.S.', 'yearBorn': 1984, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Jeremy  Waxman', 'title': 'Vice President of Accounting & Administration', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Jacques  Cornet', 'title': 'Investor Relations of  ICR Inc.', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Benjamin  Somogyi', 'title': 'Assistant General Counsel & Director of Compliance', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Amanda  Schumer', 'title': 'Director of People', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Moira  McCloskey', 'title': 'Senior Vice President of Capital Markets', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}]"
+auditRisk,2
+boardRisk,2
+compensationRisk,2
+shareHolderRightsRisk,8
+overallRisk,4
+governanceEpochDate,1743465600
+compensationAsOfEpochDate,1735603200
+executiveTeam,[]
+maxAge,86400
+priceHint,2
+previousClose,32.05
+open,32.21
+dayLow,32.1686
+dayHigh,32.83
+regularMarketPreviousClose,32.05
+regularMarketOpen,32.21
+regularMarketDayLow,32.1686
+regularMarketDayHigh,32.83
+dividendRate,1.73
+dividendYield,5.32
+exDividendDate,1742428800
+payoutRatio,0.6621
+fiveYearAvgDividendYield,5.0
+beta,0.725
+trailingPE,12.710938
+forwardPE,11.9194145
+volume,3663443
+regularMarketVolume,3663443
+averageVolume,7520882
+averageVolume10days,9734250
+averageDailyVolume10Day,9734250
+bid,32.65
+ask,33.0
+bidSize,14
+askSize,9
+marketCap,34385018880
+fiftyTwoWeekLow,27.53
+fiftyTwoWeekHigh,34.29
+priceToSalesTrailing12Months,8.933019
+fiftyDayAverage,31.5494
+twoHundredDayAverage,31.3736
+trailingAnnualDividendRate,1.695
+trailingAnnualDividendYield,0.052886117
+currency,USD
+tradeable,False
+enterpriseValue,51904876544
+profitMargins,0.69594
+floatShares,1052388433
+sharesOutstanding,1056700032
+sharesShort,30534051
+sharesShortPriorMonth,36294458
+sharesShortPreviousMonthDate,1740700800
+dateShortInterest,1743379200
+sharesPercentSharesOut,0.028900001
+heldPercentInsiders,0.00274
+heldPercentInstitutions,0.99863
+shortRatio,3.61
+shortPercentOfFloat,0.0337
+impliedSharesOutstanding,1056700032
+bookValue,25.122
+priceToBook,1.2952791
+lastFiscalYearEnd,1735603200
+nextFiscalYearEnd,1767139200
+mostRecentQuarter,1735603200
+earningsQuarterlyGrowth,-0.178
+netIncomeToCommon,2678810112
+trailingEps,2.56
+forwardEps,2.73
+enterpriseToRevenue,13.485
+enterpriseToEbitda,14.644
+52WeekChange,0.16672647
+SandP52WeekChange,0.0635103
+lastDividendValue,0.433
+lastDividendDate,1742428800
+quoteType,EQUITY
+currentPrice,32.54
+targetHighPrice,43.0
+targetLowPrice,32.0
+targetMeanPrice,35.96739
+targetMedianPrice,36.0
+recommendationMean,1.54167
+recommendationKey,buy
+numberOfAnalystOpinions,23
+totalCash,532332000
+totalCashPerShare,0.504
+ebitda,3544492032
+totalDebt,17650085888
+quickRatio,21.183
+currentRatio,21.185
+totalRevenue,3849204992
+debtToEquity,65.488
+revenuePerShare,3.677
+returnOnAssets,0.049489997
+returnOnEquity,0.10345
+grossProfits,3817743104
+freeCashflow,1003987776
+operatingCashflow,2381498112
+earningsGrowth,-0.19
+revenueGrowth,0.047
+grossMargins,0.99183
+ebitdaMargins,0.92084
+operatingMargins,0.85126996
+financialCurrency,USD
+symbol,VICI
+language,en-US
+region,US
+typeDisp,Equity
+quoteSourceName,Nasdaq Real Time Price
+triggerable,True
+customPriceAlertConfidence,HIGH
+marketState,CLOSED
+fiftyDayAverageChange,0.9906006
+fiftyDayAverageChangePercent,0.031398397
+twoHundredDayAverageChange,1.1664009
+twoHundredDayAverageChangePercent,0.037177783
+sourceInterval,15
+exchangeDataDelayedBy,0
+averageAnalystRating,1.5 - Buy
+cryptoTradeable,False
+shortName,VICI Properties Inc.
+hasPrePostMarketData,True
+firstTradeDateMilliseconds,1514903400000
+postMarketChangePercent,0.122928
+postMarketPrice,32.58
+postMarketChange,0.0400009
+regularMarketChange,0.490002
+regularMarketDayRange,32.1686 - 32.83
+fullExchangeName,NYSE
+averageDailyVolume3Month,7520882
+fiftyTwoWeekLowChange,5.01
+fiftyTwoWeekLowChangePercent,0.18198329
+fiftyTwoWeekRange,27.53 - 34.29
+fiftyTwoWeekHighChange,-1.75
+fiftyTwoWeekHighChangePercent,-0.051035285
+fiftyTwoWeekChangePercent,16.672647
+dividendDate,1743638400
+earningsTimestamp,1746043200
+earningsTimestampStart,1746043200
+earningsTimestampEnd,1746043200
+earningsCallTimestampStart,1746108000
+earningsCallTimestampEnd,1746108000
+isEarningsDateEstimate,False
+epsTrailingTwelveMonths,2.56
+epsForward,2.73
+epsCurrentYear,2.75667
+priceEpsCurrentYear,11.804097
+longName,VICI Properties Inc.
+corporateActions,[]
+postMarketTime,1744934349
+regularMarketTime,1744920002
+exchange,NYQ
+messageBoardId,finmb_430871960
+exchangeTimezoneName,America/New_York
+exchangeTimezoneShortName,EDT
+gmtOffSetMilliseconds,-14400000
+market,us_market
+esgPopulated,False
+regularMarketChangePercent,1.52887
+regularMarketPrice,32.54
+displayName,VICI Properties
+trailingPegRatio,

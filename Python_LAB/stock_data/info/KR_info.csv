@@ -1,0 +1,181 @@
+Attribute,Value
+address1,1014 Vine Street
+city,Cincinnati
+state,OH
+zip,45202-1100
+country,United States
+phone,513 762 4000
+website,https://www.thekrogerco.com
+industry,Grocery Stores
+industryKey,grocery-stores
+industryDisp,Grocery Stores
+sector,Consumer Defensive
+sectorKey,consumer-defensive
+sectorDisp,Consumer Defensive
+longBusinessSummary,"The Kroger Co. operates as a food and drug retailer in the United States. The company operates combination food and drug stores, multi-department stores, marketplace stores, and price impact warehouses. Its combination food and drug stores offer natural food and organic sections, pharmacies, general merchandise, pet centers, fresh seafood, and organic produce; and its multi-department stores provide apparel, home fashion and furnishings, outdoor living, electronics, automotive products, and toys. The company's marketplace stores offer full-service grocery, pharmacy, health and beauty care, and perishable goods, as well as general merchandise, including apparel, home goods, and toys; and its price impact warehouse stores provide grocery, and health and beauty care items, as well as meat, dairy, baked goods, and fresh produce items. It also manufactures and processes food products for sale in its supermarkets and online; and sells fuel through its fuel centers. The company sells its products through its stores, fuel centers, and online platforms. The Kroger Co. was founded in 1883 and is based in Cincinnati, Ohio."
+fullTimeEmployees,409000
+companyOfficers,"[{'maxAge': 1, 'name': 'Mr. Ronald L. Sargent M.B.A.', 'age': 68, 'title': 'Chairman of the Board & Interim CEO', 'yearBorn': 1956, 'fiscalYear': 2023, 'totalPay': 172610, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Robinson C. Quast CPA', 'title': 'Vice President of Investor Relations', 'fiscalYear': 2023, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Christine S. Wheatley', 'age': 53, 'title': 'Executive VP, Secretary & General Counsel', 'yearBorn': 1971, 'fiscalYear': 2023, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Erin  Rolfes', 'title': 'Director of Corporate Communications & Media', 'fiscalYear': 2023, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Keith G. Dailey', 'age': 42, 'title': 'Group VP of Corporate Affairs, Chief Communications Officer & Chief Sustainability Officer', 'yearBorn': 1982, 'fiscalYear': 2023, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Dana  Zurcher', 'title': 'President of the Columbus Division', 'fiscalYear': 2023, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Colleen  Juergensen', 'title': 'President of Central division', 'fiscalYear': 2023, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Matthew  Perin', 'title': 'Head of Government Relations & Regulatory Affairs', 'fiscalYear': 2023, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Colleen R. Lindholz', 'title': 'President of Kroger Health', 'fiscalYear': 2023, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Scott  Hays', 'title': 'President of the Cincinnati/Dayton Division', 'fiscalYear': 2023, 'exercisedValue': 0, 'unexercisedValue': 0}]"
+auditRisk,7
+boardRisk,7
+compensationRisk,3
+shareHolderRightsRisk,7
+overallRisk,6
+governanceEpochDate,1743465600
+compensationAsOfEpochDate,1703980800
+irWebsite,http://www.thekrogerco.com/finance/financialinfo.htm
+executiveTeam,[]
+maxAge,86400
+priceHint,2
+previousClose,69.01
+open,68.9
+dayLow,68.83
+dayHigh,71.68
+regularMarketPreviousClose,69.01
+regularMarketOpen,68.9
+regularMarketDayLow,68.83
+regularMarketDayHigh,71.68
+dividendRate,1.28
+dividendYield,1.8
+exDividendDate,1747267200
+payoutRatio,0.33240002
+fiveYearAvgDividendYield,2.0
+beta,0.593
+trailingPE,19.405994
+forwardPE,15.550219
+volume,11454489
+regularMarketVolume,11454489
+averageVolume,7000591
+averageVolume10days,11187860
+averageDailyVolume10Day,11187860
+bid,71.07
+ask,71.3
+bidSize,8
+askSize,8
+marketCap,47068872704
+fiftyTwoWeekLow,49.04
+fiftyTwoWeekHigh,71.93
+priceToSalesTrailing12Months,0.31992874
+fiftyDayAverage,65.9852
+twoHundredDayAverage,59.1264
+trailingAnnualDividendRate,1.25
+trailingAnnualDividendYield,0.018113317
+currency,USD
+tradeable,False
+enterpriseValue,72116559872
+profitMargins,0.01811
+floatShares,740370400
+sharesOutstanding,660894016
+sharesShort,34893328
+sharesShortPriorMonth,38071519
+sharesShortPreviousMonthDate,1740700800
+dateShortInterest,1743379200
+sharesPercentSharesOut,0.052800003
+heldPercentInsiders,0.083780006
+heldPercentInstitutions,0.83612
+shortRatio,4.8
+shortPercentOfFloat,0.0608
+impliedSharesOutstanding,752195008
+bookValue,12.338
+priceToBook,5.7724104
+lastFiscalYearEnd,1738368000
+nextFiscalYearEnd,1769904000
+mostRecentQuarter,1621641600
+earningsQuarterlyGrowth,-0.884
+netIncomeToCommon,2644999936
+trailingEps,3.67
+forwardEps,4.58
+lastSplitFactor,2:1
+lastSplitDate,1436832000
+enterpriseToRevenue,0.49
+enterpriseToEbitda,9.101
+52WeekChange,0.2589712
+SandP52WeekChange,0.0635103
+lastDividendValue,0.32
+lastDividendDate,1739491200
+quoteType,EQUITY
+currentPrice,71.22
+targetHighPrice,76.0
+targetLowPrice,57.0
+targetMeanPrice,67.64091
+targetMedianPrice,68.5
+recommendationMean,2.28
+recommendationKey,buy
+numberOfAnalystOpinions,22
+totalCash,2308999936
+totalCashPerShare,3.087
+ebitda,7923999744
+totalDebt,21152999424
+quickRatio,0.386
+currentRatio,0.958
+totalRevenue,147122995200
+debtToEquity,229.201
+revenuePerShare,205.766
+returnOnAssets,0.056339998
+returnOnEquity,0.26879
+grossProfits,34574000128
+freeCashflow,2096375040
+operatingCashflow,5793999872
+earningsGrowth,-0.882
+revenueGrowth,-0.006
+grossMargins,0.235
+ebitdaMargins,0.05386
+operatingMargins,0.01993
+financialCurrency,USD
+symbol,KR
+language,en-US
+region,US
+typeDisp,Equity
+quoteSourceName,Nasdaq Real Time Price
+triggerable,True
+customPriceAlertConfidence,HIGH
+hasPrePostMarketData,True
+firstTradeDateMilliseconds,-252322200000
+corporateActions,"[{'header': 'Dividend', 'message': 'KR announced a cash dividend of 0.32 with an ex-date of May. 15, 2025', 'meta': {'eventType': 'DIVIDEND', 'dateEpochMs': 1747281600000, 'amount': '0.32'}}]"
+postMarketTime,1744933833
+regularMarketTime,1744920002
+exchange,NYQ
+messageBoardId,finmb_284342
+exchangeTimezoneName,America/New_York
+exchangeTimezoneShortName,EDT
+gmtOffSetMilliseconds,-14400000
+market,us_market
+esgPopulated,False
+regularMarketChangePercent,3.20243
+regularMarketPrice,71.22
+shortName,Kroger Company (The)
+longName,The Kroger Co.
+postMarketChangePercent,0.014044
+postMarketPrice,71.23
+postMarketChange,0.0100021
+regularMarketChange,2.21
+regularMarketDayRange,68.83 - 71.68
+fullExchangeName,NYSE
+averageDailyVolume3Month,7000591
+fiftyTwoWeekLowChange,22.18
+fiftyTwoWeekLowChangePercent,0.45228386
+fiftyTwoWeekRange,49.04 - 71.93
+fiftyTwoWeekHighChange,-0.7099991
+fiftyTwoWeekHighChangePercent,-0.009870695
+fiftyTwoWeekChangePercent,25.897121
+dividendDate,1748736000
+earningsTimestamp,1741266007
+earningsTimestampStart,1750249800
+earningsTimestampEnd,1750681800
+earningsCallTimestampStart,1741273200
+earningsCallTimestampEnd,1741273200
+isEarningsDateEstimate,True
+epsTrailingTwelveMonths,3.67
+epsForward,4.58
+epsCurrentYear,4.73986
+priceEpsCurrentYear,15.025761
+fiftyDayAverageChange,5.2348022
+fiftyDayAverageChangePercent,0.07933298
+twoHundredDayAverageChange,12.093601
+twoHundredDayAverageChangePercent,0.20453809
+sourceInterval,15
+exchangeDataDelayedBy,0
+averageAnalystRating,2.3 - Buy
+cryptoTradeable,False
+marketState,CLOSED
+displayName,The Kroger
+trailingPegRatio,1.7245

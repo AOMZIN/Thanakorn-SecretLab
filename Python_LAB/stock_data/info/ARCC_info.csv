@@ -1,0 +1,176 @@
+Attribute,Value
+address1,1800 Avenue of the Stars
+address2,Suite 1400
+city,Los Angeles
+state,CA
+zip,90067-4733
+country,United States
+phone,310-201-4100
+fax,310 432 8632
+website,https://www.arescapitalcorp.com
+industry,Asset Management
+industryKey,asset-management
+industryDisp,Asset Management
+sector,Financial Services
+sectorKey,financial-services
+sectorDisp,Financial Services
+longBusinessSummary,"Ares Capital Corporation is a business development company specializing in acquisition, recapitalization, mezzanine debt, restructurings, rescue financing, and leveraged buyout transactions of middle market companies. It also makes growth capital and general refinancing. It prefers to make investments in companies engaged in the basic and growth manufacturing, business services, consumer products, health care products and services, and information technology service sectors. The fund will also consider investments in industries such as restaurants, retail, oil and gas, and technology sectors. It focuses on investments in Northeast, Mid-Atlantic, Southeast and Southwest regions from its New York office, the Midwest region, from the Chicago office, and the Western region from the Los Angeles office. The fund typically invests between $20 million and $200 million and a maximum of $400 million in companies with an EBITDA between $10 million and $250 million. It makes debt investments between $10 million and $100 million The fund invests through revolvers, first lien loans, warrants, unitranche structures, second lien loans, mezzanine debt, private high yield, junior capital, subordinated debt, and non-control preferred and common equity. The fund also selectively considers third-party-led senior and subordinated debt financings and opportunistically considers the purchase of stressed and discounted debt positions. The fund prefers to be an agent and/or lead the transactions in which it invests. The fund also seeks board representation in its portfolio companies."
+companyOfficers,"[{'maxAge': 1, 'name': 'Mr. Robert Kipp DeVeer III', 'age': 51, 'title': 'CEO & Director', 'yearBorn': 1973, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Bennett  Rosenthal', 'age': 61, 'title': 'Co-Founder & Chairman Emeritus', 'yearBorn': 1963, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Michael J. Arougheti', 'age': 52, 'title': 'Executive VP & Director', 'yearBorn': 1972, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. James  Miller', 'age': 47, 'title': 'President', 'yearBorn': 1977, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Scott C. Lem', 'age': 46, 'title': 'CFO & Treasurer', 'yearBorn': 1978, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Jana  Markowicz', 'age': 43, 'title': 'Chief Operating Officer', 'yearBorn': 1981, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Won Jae Cho', 'age': 41, 'title': 'Chief Accounting Officer', 'yearBorn': 1983, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. John W. Stilmar', 'title': 'Partner & Co-Head of Public Markets Investor Relations', 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Mr. Joshua M. Bloomstein J.D.', 'age': 50, 'title': 'VP, General Counsel & Secretary', 'yearBorn': 1974, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}, {'maxAge': 1, 'name': 'Ms. Lisa A. Morgan', 'age': 48, 'title': 'Chief Compliance Officer', 'yearBorn': 1976, 'fiscalYear': 2024, 'exercisedValue': 0, 'unexercisedValue': 0}]"
+auditRisk,5
+boardRisk,9
+compensationRisk,5
+shareHolderRightsRisk,5
+overallRisk,7
+governanceEpochDate,1743465600
+compensationAsOfEpochDate,1735603200
+executiveTeam,[]
+maxAge,86400
+priceHint,2
+previousClose,20.09
+open,20.15
+dayLow,20.11
+dayHigh,20.5085
+regularMarketPreviousClose,20.09
+regularMarketOpen,20.15
+regularMarketDayLow,20.11
+regularMarketDayHigh,20.5085
+dividendRate,1.92
+dividendYield,9.41
+exDividendDate,1741910400
+payoutRatio,0.78690004
+fiveYearAvgDividendYield,9.16
+beta,0.821
+trailingPE,8.360656
+forwardPE,9.272727
+volume,4197207
+regularMarketVolume,4197207
+averageVolume,5533703
+averageVolume10days,9572430
+averageDailyVolume10Day,9572430
+bid,20.36
+ask,20.42
+bidSize,57
+askSize,57
+marketCap,13963351040
+fiftyTwoWeekLow,18.26
+fiftyTwoWeekHigh,23.84
+priceToSalesTrailing12Months,4.670017
+fiftyDayAverage,22.0022
+twoHundredDayAverage,21.58445
+trailingAnnualDividendRate,1.92
+trailingAnnualDividendYield,0.09556993
+currency,USD
+tradeable,False
+enterpriseValue,26851225600
+profitMargins,0.50903
+sharesOutstanding,684478016
+sharesShort,15540111
+sharesShortPriorMonth,16309592
+sharesShortPreviousMonthDate,1740700800
+dateShortInterest,1743379200
+sharesPercentSharesOut,0.0227
+heldPercentInsiders,0.00555
+heldPercentInstitutions,0.30329
+shortRatio,3.12
+shortPercentOfFloat,0.0228
+impliedSharesOutstanding,684478016
+bookValue,19.874
+priceToBook,1.0264667
+lastFiscalYearEnd,1735603200
+nextFiscalYearEnd,1767139200
+mostRecentQuarter,1735603200
+earningsQuarterlyGrowth,-0.136
+netIncomeToCommon,1522000000
+trailingEps,2.44
+forwardEps,2.2
+enterpriseToRevenue,8.98
+52WeekChange,-0.009227753
+SandP52WeekChange,0.0635103
+lastDividendValue,0.48
+lastDividendDate,1741910400
+quoteType,EQUITY
+currentPrice,20.4
+targetHighPrice,26.0
+targetLowPrice,21.0
+targetMeanPrice,23.26923
+targetMedianPrice,23.0
+recommendationMean,1.71429
+recommendationKey,buy
+numberOfAnalystOpinions,13
+totalCash,635000000
+totalCashPerShare,0.946
+totalDebt,13788000256
+quickRatio,0.42
+currentRatio,0.502
+totalRevenue,2990000128
+debtToEquity,103.242
+revenuePerShare,4.792
+returnOnAssets,0.052610002
+returnOnEquity,0.123959996
+grossProfits,2990000128
+freeCashflow,838124992
+operatingCashflow,-2128000000
+earningsGrowth,-0.227
+revenueGrowth,0.074
+grossMargins,1.0
+ebitdaMargins,0.0
+operatingMargins,0.7365
+financialCurrency,USD
+symbol,ARCC
+language,en-US
+region,US
+typeDisp,Equity
+quoteSourceName,Nasdaq Real Time Price
+triggerable,True
+customPriceAlertConfidence,HIGH
+hasPrePostMarketData,True
+firstTradeDateMilliseconds,1096983000000
+corporateActions,[]
+postMarketTime,1744934282
+regularMarketTime,1744920002
+exchange,NMS
+messageBoardId,finmb_9771238
+exchangeTimezoneName,America/New_York
+exchangeTimezoneShortName,EDT
+gmtOffSetMilliseconds,-14400000
+market,us_market
+esgPopulated,False
+regularMarketChangePercent,1.5430536
+regularMarketPrice,20.4
+shortName,Ares Capital Corporation
+longName,Ares Capital Corporation
+postMarketChangePercent,0.253434
+postMarketPrice,20.4517
+postMarketChange,0.0517006
+regularMarketChange,0.30999947
+regularMarketDayRange,20.11 - 20.5085
+fullExchangeName,NasdaqGS
+averageDailyVolume3Month,5533703
+fiftyTwoWeekLowChange,2.1399994
+fiftyTwoWeekLowChangePercent,0.11719602
+fiftyTwoWeekRange,18.26 - 23.84
+fiftyTwoWeekHighChange,-3.4400005
+fiftyTwoWeekHighChangePercent,-0.14429532
+fiftyTwoWeekChangePercent,-0.92277527
+dividendDate,1743379200
+earningsTimestamp,1745929800
+earningsTimestampStart,1745929800
+earningsTimestampEnd,1745929800
+earningsCallTimestampStart,1745942400
+earningsCallTimestampEnd,1745942400
+isEarningsDateEstimate,False
+epsTrailingTwelveMonths,2.44
+epsForward,2.2
+epsCurrentYear,2.15825
+priceEpsCurrentYear,9.452102
+fiftyDayAverageChange,-1.6021996
+fiftyDayAverageChangePercent,-0.07281997
+twoHundredDayAverageChange,-1.1844501
+twoHundredDayAverageChangePercent,-0.05487516
+sourceInterval,15
+exchangeDataDelayedBy,0
+averageAnalystRating,1.7 - Buy
+cryptoTradeable,False
+marketState,CLOSED
+displayName,Ares Capital
+trailingPegRatio,

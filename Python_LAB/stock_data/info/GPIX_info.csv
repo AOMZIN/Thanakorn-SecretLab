@@ -1,0 +1,92 @@
+Attribute,Value
+longBusinessSummary,"The fund invests, under normal circumstances, at least 80% of its net assets plus any borrowings for investment purposes in equity investments of companies that are included in the fund’s benchmark. The fund will generally seek to maintain style, capitalization and industry characteristics similar to its benchmark."
+companyOfficers,[]
+executiveTeam,[]
+maxAge,86400
+priceHint,2
+previousClose,43.69
+open,44.01
+dayLow,43.5133
+dayHigh,44.08
+regularMarketPreviousClose,43.69
+regularMarketOpen,44.01
+regularMarketDayLow,43.5133
+regularMarketDayHigh,44.08
+trailingPE,23.412825
+volume,278819
+regularMarketVolume,278819
+averageVolume,240835
+averageVolume10days,477990
+averageDailyVolume10Day,477990
+bid,40.28
+ask,47.34
+bidSize,2
+askSize,2
+yield,0.088
+totalAssets,542374016
+fiftyTwoWeekLow,40.009
+fiftyTwoWeekHigh,50.84
+fiftyDayAverage,47.2786
+twoHundredDayAverage,48.45825
+navPrice,43.64
+currency,USD
+tradeable,False
+category,Derivative Income
+ytdReturn,-3.63917
+beta3Year,0.0
+fundFamily,Goldman Sachs
+fundInceptionDate,1698105600
+legalType,Exchange Traded Fund
+quoteType,ETF
+symbol,GPIX
+language,en-US
+region,US
+typeDisp,ETF
+quoteSourceName,Nasdaq Real Time Price
+triggerable,True
+customPriceAlertConfidence,HIGH
+hasPrePostMarketData,True
+firstTradeDateMilliseconds,1698413400000
+corporateActions,[]
+postMarketTime,1744927421
+regularMarketTime,1744920002
+exchange,NGM
+messageBoardId,finmb_1858494295
+exchangeTimezoneName,America/New_York
+exchangeTimezoneShortName,EDT
+gmtOffSetMilliseconds,-14400000
+market,us_market
+esgPopulated,False
+regularMarketChangePercent,0.16021903
+regularMarketPrice,43.76
+shortName,Goldman Sachs S&P 500 Core Prem
+longName,Goldman Sachs S&P 500 Core Premium Income ETF
+postMarketChangePercent,0.114267
+postMarketPrice,43.81
+postMarketChange,0.0500031
+regularMarketChange,0.069999695
+regularMarketDayRange,43.5133 - 44.08
+fullExchangeName,NasdaqGM
+averageDailyVolume3Month,240835
+fiftyTwoWeekLowChange,3.7509995
+fiftyTwoWeekLowChangePercent,0.0937539
+fiftyTwoWeekRange,40.009 - 50.84
+fiftyTwoWeekHighChange,-7.080002
+fiftyTwoWeekHighChangePercent,-0.13926046
+fiftyTwoWeekChangePercent,-1.3525724
+dividendYield,8.8
+trailingThreeMonthReturns,-3.63917
+trailingThreeMonthNavReturns,-3.63917
+netAssets,542374020.0
+epsTrailingTwelveMonths,1.8690611
+fiftyDayAverageChange,-3.5186005
+fiftyDayAverageChangePercent,-0.07442269
+twoHundredDayAverageChange,-4.69825
+twoHundredDayAverageChangePercent,-0.09695459
+netExpenseRatio,0.29
+sourceInterval,15
+exchangeDataDelayedBy,0
+ipoExpectedDate,2023-10-26
+cryptoTradeable,False
+marketState,CLOSED
+trailingPegRatio,

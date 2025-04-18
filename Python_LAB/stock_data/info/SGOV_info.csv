@@ -1,0 +1,91 @@
+Attribute,Value
+phone,1-800-474-2737
+longBusinessSummary,The fund will invest at least 80% of its assets in the component securities of the underlying index and it will invest at least 90% of its assets in U.S. Treasury securities that BFA believes will help the fund track the underlying index. The index measures the performance of public obligations of the U.S. Treasury that have a remaining maturity of less than or equal to three months.
+companyOfficers,[]
+executiveTeam,[]
+maxAge,86400
+priceHint,2
+previousClose,100.53
+open,100.575
+dayLow,100.57
+dayHigh,100.58
+regularMarketPreviousClose,100.53
+regularMarketOpen,100.575
+regularMarketDayLow,100.57
+regularMarketDayHigh,100.58
+volume,8494772
+regularMarketVolume,8494772
+averageVolume,11176466
+averageVolume10days,15538330
+averageDailyVolume10Day,15538330
+bid,100.6
+ask,0.0
+bidSize,3060
+askSize,3960
+yield,0.048899997
+totalAssets,39399522304
+fiftyTwoWeekLow,100.15
+fiftyTwoWeekHigh,100.75
+fiftyDayAverage,100.498
+twoHundredDayAverage,100.4962
+navPrice,100.51716
+currency,USD
+tradeable,False
+category,Ultrashort Bond
+ytdReturn,1.03209
+beta3Year,0.0
+fundFamily,iShares
+fundInceptionDate,1590451200
+legalType,Exchange Traded Fund
+threeYearAverageReturn,0.0438769
+quoteType,ETF
+symbol,SGOV
+language,en-US
+region,US
+typeDisp,ETF
+quoteSourceName,Nasdaq Real Time Price
+triggerable,True
+customPriceAlertConfidence,HIGH
+corporateActions,[]
+postMarketTime,1744934382
+regularMarketTime,1744920003
+marketState,CLOSED
+exchange,PCX
+messageBoardId,finmb_662509181
+exchangeTimezoneName,America/New_York
+exchangeTimezoneShortName,EDT
+gmtOffSetMilliseconds,-14400000
+market,us_market
+esgPopulated,False
+regularMarketChangePercent,0.03979
+regularMarketPrice,100.57
+shortName,iShares 0-3 Month Treasury Bond
+longName,iShares 0-3 Month Treasury Bond ETF
+postMarketChangePercent,0.0397742
+postMarketPrice,100.61
+postMarketChange,0.0400009
+regularMarketChange,0.0400009
+regularMarketDayRange,100.57 - 100.58
+fullExchangeName,NYSEArca
+averageDailyVolume3Month,11176466
+fiftyTwoWeekLowChange,0.41999817
+fiftyTwoWeekLowChangePercent,0.004193691
+fiftyTwoWeekRange,100.15 - 100.75
+fiftyTwoWeekHighChange,-0.1800003
+fiftyTwoWeekHighChangePercent,-0.0017866035
+fiftyTwoWeekChangePercent,-0.01988411
+dividendYield,4.89
+trailingThreeMonthReturns,1.03209
+trailingThreeMonthNavReturns,1.03209
+netAssets,39399522000.0
+fiftyDayAverageChange,0.071998596
+fiftyDayAverageChangePercent,0.0007164182
+twoHundredDayAverageChange,0.07379913
+twoHundredDayAverageChangePercent,0.0007343475
+netExpenseRatio,0.09
+sourceInterval,15
+exchangeDataDelayedBy,0
+hasPrePostMarketData,True
+firstTradeDateMilliseconds,1591018200000
+cryptoTradeable,False
+trailingPegRatio,
