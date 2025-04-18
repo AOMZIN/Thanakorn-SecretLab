@@ -41,6 +41,10 @@ dependencies:
   csv: ^6.0.0
   archive: ^3.3.5
   file_picker: ^10.1.2
+  fl_chart: ^0.70.2
+  provider: ^6.1.4
+  url_launcher: ^6.3.1
+  debounce_throttle: ^2.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
